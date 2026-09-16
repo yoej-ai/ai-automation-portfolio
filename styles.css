@@ -363,3 +363,244 @@ dialog::backdrop { background: rgba(2, 7, 14, .82); backdrop-filter: blur(10px);
     width: 100%;
   }
 }
+
+/* Interactive Automation ROI Calculator */
+
+.roi-section {
+  color: var(--text);
+  background: #080f1c;
+}
+
+.roi-app {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #0b1525;
+  box-shadow: var(--shadow);
+}
+
+.roi-controls,
+.roi-results {
+  padding: 30px;
+}
+
+.roi-controls {
+  border-right: 1px solid var(--line);
+}
+
+.roi-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.roi-panel-head > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.roi-icon {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  color: #bfb5ff;
+  background: rgba(155, 140, 255, 0.11);
+  border-radius: 8px;
+}
+
+.estimate-pill {
+  padding: 5px 9px;
+  color: #b8c7d9;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.range-field {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 21px;
+  color: #c6d3e2;
+  font-size: 13px;
+}
+
+.range-field output {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.roi-app input[type="range"] {
+  width: 100%;
+  height: 4px;
+  margin-top: 13px;
+  accent-color: var(--violet);
+  cursor: pointer;
+}
+
+.roi-divider {
+  height: 1px;
+  margin: 30px 0;
+  background: var(--line);
+}
+
+.select-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.select-grid label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.select-grid select {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 7px;
+  padding: 0 12px;
+  color: var(--text);
+  background: #0a1321;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.result-grid article {
+  min-height: 132px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.result-grid small,
+.investment-card small {
+  color: var(--muted);
+}
+
+.result-grid strong {
+  margin-top: 8px;
+  color: #9b8cff;
+  font: 800 clamp(1.7rem, 3vw, 2.35rem) "Manrope", sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.result-grid span,
+.investment-card span {
+  color: #7489a2;
+  font-size: 11px;
+}
+
+.result-grid .result-green strong {
+  color: var(--success);
+}
+
+.result-grid .result-amber strong {
+  color: #ffc463;
+}
+
+.investment-card {
+  margin-top: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.investment-card > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.investment-card strong {
+  margin: 6px 0 2px;
+  font: 800 1.35rem "Manrope", sans-serif;
+}
+
+.payback {
+  text-align: right;
+}
+
+.payback strong {
+  color: var(--success);
+}
+
+.included-card {
+  margin-top: 12px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.included-card ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px 22px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.roi-disclaimer {
+  margin: 16px 0 0;
+  color: #73869d;
+  font-size: 11px;
+}
+
+@media (max-width: 960px) {
+  .roi-app {
+    grid-template-columns: 1fr;
+  }
+
+  .roi-controls {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 720px) {
+  .select-grid,
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roi-controls,
+  .roi-results {
+    padding: 22px;
+  }
+
+  .investment-card {
+    flex-direction: column;
+  }
+
+  .payback {
+    text-align: left;
+  }
+
+  .included-card ul {
+    grid-template-columns: 1fr;
+  }
+}
