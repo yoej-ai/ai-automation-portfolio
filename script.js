@@ -10,7 +10,13 @@ const projects = [
     problem: "Inbound vehicle-sales leads need consistent qualification, organized records, and different follow-up timing based on buying intent.",
     solution: "A webhook passes each lead to a Groq-powered AI agent. Code normalizes the structured result, Google Sheets records it, and a Switch node routes HOT, WARM, and COLD paths.",
     safeguards: "Structured parsing, explicit category routing, immediate HOT alerts, timed WARM follow-up, and separate COLD nurturing.",
-    images: [{ src: "car-sales-lead.jpg", caption: "Complete n8n lead qualification workflow", alt: "n8n workflow for AI car sales lead qualification with HOT, WARM, and COLD routes" }]
+    images: [
+      {
+        src: "car-sales-lead.jpg",
+        caption: "Complete n8n lead qualification workflow",
+        alt: "n8n workflow for AI car sales lead qualification with HOT, WARM, and COLD routes"
+      }
+    ]
   },
   {
     number: "02",
@@ -24,10 +30,26 @@ const projects = [
     solution: "A main AI receptionist uses memory and three connected tool sub-workflows. Each tool returns verified results before the assistant communicates availability or changes.",
     safeguards: "Calendar conflict checks, clinic-hours validation, exact action routing, verified tool returns, and synchronized Calendar/Sheets updates.",
     images: [
-      { src: "dental-main.jpg", caption: "Main AI Dental Receptionist", alt: "Main n8n AI dental receptionist workflow with Groq, memory, and three tools" },
-      { src: "dental-slots.jpg", caption: "Get Dental Slots tool", alt: "n8n sub-workflow that validates a requested dental slot and checks Google Calendar" },
-      { src: "dental-create.jpg", caption: "Create Appointment tool", alt: "n8n sub-workflow that validates, creates, records, and confirms a dental appointment" },
-      { src: "dental-manage.jpg", caption: "Manage Appointment tool", alt: "n8n sub-workflow for checking, canceling, and rescheduling dental appointments" }
+      {
+        src: "dental-main.jpg",
+        caption: "Main AI Dental Receptionist",
+        alt: "Main n8n AI dental receptionist workflow with Groq, memory, and three tools"
+      },
+      {
+        src: "dental-slots.jpg",
+        caption: "Get Dental Slots tool",
+        alt: "n8n sub-workflow that validates a requested dental slot and checks Google Calendar"
+      },
+      {
+        src: "dental-create.jpg",
+        caption: "Create Appointment tool",
+        alt: "n8n sub-workflow that validates, creates, records, and confirms a dental appointment"
+      },
+      {
+        src: "dental-manage.jpg",
+        caption: "Manage Appointment tool",
+        alt: "n8n sub-workflow for checking, canceling, and rescheduling dental appointments"
+      }
     ]
   },
   {
@@ -41,7 +63,13 @@ const projects = [
     problem: "Candidate intake, CV review, role criteria, questionnaires, communication, and scheduling often become disconnected manual steps.",
     solution: "The workflow stores the applicant and CV, extracts the document, evaluates fit against Airtable job records, and routes potential hires and rejections through dedicated branches.",
     safeguards: "Structured output parsers, Airtable source records, explicit hiring branches, stored questionnaire answers, and controlled calendar tooling.",
-    images: [{ src: "hr-evaluation.jpg", caption: "Complete HR evaluation and interview workflow", alt: "Large n8n HR workflow for CV intake, AI evaluation, questionnaires, email, and calendar scheduling" }]
+    images: [
+      {
+        src: "hr-evaluation.jpg",
+        caption: "Complete HR evaluation and interview workflow",
+        alt: "Large n8n HR workflow for CV intake, AI evaluation, questionnaires, email, and calendar scheduling"
+      }
+    ]
   },
   {
     number: "04",
@@ -54,7 +82,18 @@ const projects = [
     problem: "Webhook orders need idempotency, payment verification, item-level stock validation, reliable updates, and clear responses for every exception path.",
     solution: "A Make Data Store blocks duplicate order IDs. Paid items pass Airtable inventory retrieval, Groq JSON review, deterministic quantity checks, aggregation, and fulfillment updates.",
     safeguards: "409 duplicate response, positive whole-quantity checks, stock validation, duplicate-SKU review, Needs Review and Awaiting Payment paths, and explicit HTTP responses.",
-    images: [{ src: "make-ecommerce.png", caption: "Complete Make.com e-commerce scenario", alt: "Panoramic Make.com workflow for e-commerce order fulfillment and inventory management" }]
+    video: {
+      src: "ai-ecommerce-demo.mp4",
+      poster: "make-ecommerce.png",
+      caption: "Live demo: order intake, inventory validation, fulfillment, and exception handling"
+    },
+    images: [
+      {
+        src: "make-ecommerce.png",
+        caption: "Complete Make.com e-commerce scenario",
+        alt: "Panoramic Make.com workflow for e-commerce order fulfillment and inventory management"
+      }
+    ]
   },
   {
     number: "05",
@@ -68,10 +107,26 @@ const projects = [
     solution: "Groq returns a structured ticket with category, severity, priority, sentiment, summary, and recommended action. A router separates URGENT from NORMAL and LOW requests.",
     safeguards: "Controlled JSON schema, centralized ticket log, explicit priority filters, immediate human escalation, and customer acknowledgement paths.",
     images: [
-      { src: "make-support.jpg", caption: "Complete Make.com support triage scenario", alt: "Make.com workflow for AI support triage with Sheets, router, Slack, and Gmail" },
-      { src: "make-support-slack.jpg", caption: "Urgent Slack escalation output", alt: "Slack urgent customer support ticket generated by the Make.com workflow" },
-      { src: "make-support-email.jpg", caption: "Urgent customer acknowledgement", alt: "Customer support acknowledgement email generated by the workflow" },
-      { src: "make-support-sheet.jpg", caption: "Structured Google Sheets ticket log", alt: "Google Sheets row containing structured AI customer support ticket data" }
+      {
+        src: "make-support.jpg",
+        caption: "Complete Make.com support triage scenario",
+        alt: "Make.com workflow for AI support triage with Sheets, router, Slack, and Gmail"
+      },
+      {
+        src: "make-support-slack.jpg",
+        caption: "Urgent Slack escalation output",
+        alt: "Slack urgent customer support ticket generated by the Make.com workflow"
+      },
+      {
+        src: "make-support-email.jpg",
+        caption: "Urgent customer acknowledgement",
+        alt: "Customer support acknowledgement email generated by the workflow"
+      },
+      {
+        src: "make-support-sheet.jpg",
+        caption: "Structured Google Sheets ticket log",
+        alt: "Google Sheets row containing structured AI customer support ticket data"
+      }
     ]
   },
   {
@@ -85,7 +140,13 @@ const projects = [
     problem: "Every new client requires the same manual setup across records, folders, project tasks, and communications.",
     solution: "One form submission triggers a six-step Zap that records the client, sends confirmation, creates the workspace, opens the project task, and notifies the team.",
     safeguards: "Single source form, explicit field mapping, sequential setup, and separate client/internal notifications.",
-    images: [{ src: "zapier-onboarding.jpg", caption: "Complete six-step Zapier onboarding flow", alt: "Zapier client onboarding workflow using Forms, Sheets, Gmail, Drive, and Trello" }]
+    images: [
+      {
+        src: "zapier-onboarding.jpg",
+        caption: "Complete six-step Zapier onboarding flow",
+        alt: "Zapier client onboarding workflow using Forms, Sheets, Gmail, Drive, and Trello"
+      }
+    ]
   },
   {
     number: "07",
@@ -98,7 +159,13 @@ const projects = [
     problem: "Operational emails need consistent analysis, records, priority decisions, and replies without losing urgent requests in the inbox.",
     solution: "Groq analyzes the message, Code steps normalize structured data, Airtable logs the request, and Paths route urgent work to Slack plus Gmail while standard work receives an acknowledgement.",
     safeguards: "Structured normalization, centralized logging, explicit path conditions, human escalation for urgent requests, and priority-specific responses.",
-    images: [{ src: "zapier-email-ops.jpg", caption: "Complete AI email operations Zap", alt: "Zapier AI email operations workflow with Groq, Code, Airtable, Paths, Slack, and Gmail" }]
+    images: [
+      {
+        src: "zapier-email-ops.jpg",
+        caption: "Complete AI email operations Zap",
+        alt: "Zapier AI email operations workflow with Groq, Code, Airtable, Paths, Slack, and Gmail"
+      }
+    ]
   }
 ];
 
@@ -110,14 +177,25 @@ const lightboxImage = document.querySelector("#lightbox-image");
 const lightboxCaption = document.querySelector("#lightbox-caption");
 
 function renderProjects(filter = "all") {
-  const visible = filter === "all"
-    ? projects
-    : projects.filter(project => project.platform === filter);
+  const visible =
+    filter === "all"
+      ? projects
+      : projects.filter(project => project.platform === filter);
 
   grid.innerHTML = visible.map(project => `
-    <article class="project-card reveal" style="--accent:${project.platform === "n8n" ? "rgba(41,214,199,.14)" : project.platform === "make" ? "rgba(155,140,255,.15)" : "rgba(255,163,92,.13)"}">
+    <article
+      class="project-card reveal"
+      style="--accent:${
+        project.platform === "n8n"
+          ? "rgba(41,214,199,.14)"
+          : project.platform === "make"
+            ? "rgba(155,140,255,.15)"
+            : "rgba(255,163,92,.13)"
+      }"
+    >
       <div class="project-meta">
         <span class="project-number">CASE STUDY ${project.number}</span>
+
         <div class="badge-row">
           <span class="project-badge">${project.platformLabel}</span>
           <span class="project-badge completed">● Completed</span>
@@ -133,7 +211,12 @@ function renderProjects(filter = "all") {
 
       <div class="project-footer">
         <span class="tool-list">${project.tools}</span>
-        <button class="case-button" type="button" data-project="${project.number}">
+
+        <button
+          class="case-button"
+          type="button"
+          data-project="${project.number}"
+        >
           View case study ↗
         </button>
       </div>
@@ -177,6 +260,40 @@ function openCaseStudy(number) {
       </div>
     </div>
 
+    ${project.video ? `
+      <h3 class="workflow-heading">Workflow demo video</h3>
+
+      <figure style="margin:0 0 1.5rem">
+        <video
+          controls
+          preload="metadata"
+          poster="${project.video.poster}"
+          aria-label="${project.title} workflow demonstration"
+          style="
+            display:block;
+            width:100%;
+            aspect-ratio:16/9;
+            background:#050b14;
+            border:1px solid rgba(148,163,184,.22);
+            border-radius:16px;
+          "
+        >
+          <source src="${project.video.src}" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+
+        <figcaption
+          style="
+            margin-top:.65rem;
+            color:#9fb2c9;
+            font-size:.88rem;
+          "
+        >
+          ${project.video.caption}
+        </figcaption>
+      </figure>
+    ` : ""}
+
     <h3 class="workflow-heading">Actual workflow evidence</h3>
 
     <div class="workflow-gallery">
@@ -188,8 +305,15 @@ function openCaseStudy(number) {
           data-caption="${image.caption}"
           data-alt="${image.alt}"
         >
-          <img src="${image.src}" alt="${image.alt}" loading="lazy" />
-          <span>${index + 1}. ${image.caption} · Click to enlarge</span>
+          <img
+            src="${image.src}"
+            alt="${image.alt}"
+            loading="lazy"
+          >
+
+          <span>
+            ${index + 1}. ${image.caption} · Click to enlarge
+          </span>
         </button>
       `).join("")}
     </div>
@@ -201,7 +325,10 @@ function openCaseStudy(number) {
 
 grid.addEventListener("click", event => {
   const button = event.target.closest("[data-project]");
-  if (button) openCaseStudy(button.dataset.project);
+
+  if (button) {
+    openCaseStudy(button.dataset.project);
+  }
 });
 
 document.querySelector(".dialog-close").addEventListener("click", () => {
@@ -213,7 +340,9 @@ caseDialog.addEventListener("close", () => {
 });
 
 caseDialog.addEventListener("click", event => {
-  if (event.target === caseDialog) caseDialog.close();
+  if (event.target === caseDialog) {
+    caseDialog.close();
+  }
 });
 
 dialogContent.addEventListener("click", event => {
@@ -223,6 +352,7 @@ dialogContent.addEventListener("click", event => {
   lightboxImage.src = shot.dataset.src;
   lightboxImage.alt = shot.dataset.alt;
   lightboxCaption.textContent = shot.dataset.caption;
+
   imageDialog.showModal();
 });
 
@@ -231,7 +361,9 @@ document.querySelector(".image-close").addEventListener("click", () => {
 });
 
 imageDialog.addEventListener("click", event => {
-  if (event.target === imageDialog) imageDialog.close();
+  if (event.target === imageDialog) {
+    imageDialog.close();
+  }
 });
 
 document.querySelectorAll(".filter-button").forEach(button => {
@@ -243,6 +375,7 @@ document.querySelectorAll(".filter-button").forEach(button => {
 
     button.classList.add("active");
     button.setAttribute("aria-pressed", "true");
+
     renderProjects(button.dataset.filter);
   });
 });
@@ -252,6 +385,7 @@ const navLinks = document.querySelector(".nav-links");
 
 menuButton.addEventListener("click", () => {
   const open = navLinks.classList.toggle("open");
+
   menuButton.setAttribute("aria-expanded", String(open));
   menuButton.setAttribute(
     "aria-label",
