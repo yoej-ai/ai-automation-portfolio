@@ -631,3 +631,206 @@ dialog::backdrop { background: rgba(2, 7, 14, .82); backdrop-filter: blur(10px);
     grid-template-columns: 1fr;
   }
 }
+/* Professional visual refresh */
+
+body {
+  background: #06101c;
+}
+
+.hero {
+  background:
+    radial-gradient(
+      circle at 82% 24%,
+      rgba(41, 214, 199, 0.1),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 18% 8%,
+      rgba(155, 140, 255, 0.11),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #06101c 0%,
+      #091728 55%,
+      #07111f 100%
+    );
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.11;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      rgba(148, 170, 199, 0.18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(148, 170, 199, 0.18) 1px,
+      transparent 1px
+    );
+  background-size: 54px 54px;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8),
+    transparent 85%
+  );
+}
+
+.hero-grid {
+  z-index: 1;
+}
+
+.hero-visual {
+  min-height: 470px;
+}
+
+.portrait-card {
+  width: min(78vw, 370px) !important;
+  aspect-ratio: 1 !important;
+  border: 3px solid rgba(41, 214, 199, 0.7) !important;
+  border-radius: 50% !important;
+  transform: none !important;
+  box-shadow:
+    0 0 0 12px rgba(41, 214, 199, 0.055),
+    0 35px 90px rgba(0, 0, 0, 0.38) !important;
+}
+
+.profile-photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 22% !important;
+}
+
+.portrait-card::after,
+.portrait-caption,
+.profile-float {
+  display: none !important;
+}
+
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  width: min(86vw, 410px);
+  aspect-ratio: 1;
+  border: 1px dashed rgba(155, 140, 255, 0.35);
+  border-radius: 50%;
+  animation: orbitTurn 28s linear infinite;
+}
+
+.section-dark {
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(41, 214, 199, 0.055),
+      transparent 28%
+    ),
+    linear-gradient(150deg, #0a1727, #081321);
+}
+
+.roi-section {
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(155, 140, 255, 0.1),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(41, 214, 199, 0.075),
+      transparent 30%
+    ),
+    linear-gradient(145deg, #07111f, #0a1627);
+}
+
+.roi-app {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(15, 29, 49, 0.98),
+    rgba(8, 19, 34, 0.98)
+  );
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(155, 140, 255, 0.04);
+}
+
+.roi-app::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--violet),
+    var(--cyan),
+    transparent
+  );
+}
+
+.result-grid article,
+.investment-card,
+.included-card {
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.result-grid article:hover,
+.investment-card:hover,
+.included-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(155, 140, 255, 0.34);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+}
+
+.roi-app input[type="range"] {
+  filter: drop-shadow(
+    0 0 7px rgba(155, 140, 255, 0.28)
+  );
+}
+
+.roi-app select:focus {
+  outline: 2px solid rgba(41, 214, 199, 0.35);
+  outline-offset: 2px;
+}
+
+.estimate-pill {
+  animation: softPulse 3s ease-in-out infinite;
+}
+
+@keyframes orbitTurn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes softPulse {
+  50% {
+    border-color: rgba(41, 214, 199, 0.42);
+    box-shadow: 0 0 18px rgba(41, 214, 199, 0.08);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-visual {
+    min-height: 390px;
+  }
+
+  .portrait-card {
+    width: min(76vw, 330px) !important;
+  }
+
+  .hero-visual::before {
+    width: min(84vw, 365px);
+  }
+}
