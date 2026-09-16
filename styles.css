@@ -599,7 +599,34 @@ dialog::backdrop { background: rgba(2, 7, 14, .82); backdrop-filter: blur(10px);
   .payback {
     text-align: left;
   }
+/* Clean professional profile layout */
 
+.portrait-card {
+  width: min(100%, 390px);
+  aspect-ratio: 4 / 5;
+  transform: none;
+  border-radius: 26px;
+}
+
+.profile-photo {
+  object-position: center 20%;
+}
+
+.profile-float {
+  display: none;
+}
+
+.portrait-caption {
+  left: 22px;
+  right: 22px;
+  bottom: 20px;
+}
+
+@media (max-width: 720px) {
+  .portrait-card {
+    width: min(82vw, 350px);
+  }
+}
   .included-card ul {
     grid-template-columns: 1fr;
   }
