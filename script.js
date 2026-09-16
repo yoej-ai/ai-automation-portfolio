@@ -425,3 +425,154 @@ function bindReveals() {
 
 renderProjects();
 bindReveals();
+/* Interactive Automation ROI Calculator */
+
+const roiInputs = {
+  hours: document.querySelector("#hours-per-task"),
+  tasks: document.querySelector("#tasks-per-week"),
+  cost: document.querySelector("#hourly-cost"),
+  efficiency: document.querySelector("#efficiency"),
+  currency: document.querySelector("#currency"),
+  platform: document.querySelector("#roi-platform"),
+  complexity: document.querySelector("#complexity"),
+  integrations: document.querySelector("#integrations")
+};
+
+const priceRanges = {
+  USD: {
+    simple: [300, 600],
+    medium: [650, 1200],
+    advanced: [1300, 2500],
+    integration: [60, 110]
+  },
+
+  PHP: {
+    simple: [17500, 35000],
+    medium: [38000, 70000],
+    advanced: [75000, 145000],
+    integration: [3500, 6500]
+  }
+};
+
+const moneyFormat = (value, currency) =>
+  new Intl.NumberFormat(
+    currency === "USD" ? "en-US" : "en-PH",
+    {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 0
+    }
+  ).format(value);
+
+function updateRoiCalculator() {
+  if (!roiInputs.hours) return;
+
+  const currency = roiInputs.currency.value;
+  const hours = Number(roiInputs.hours.value);
+  const tasks = Number(roiInputs.tasks.value);
+  const hourlyCost = Number(roiInputs.cost.value);
+  const efficiency = Number(roiInputs.efficiency.value) / 100;
+  const integrations = Number(roiInputs.integrations.value);
+  const complexity = roiInputs.complexity.value;
+
+  const pricing = priceRanges[currency][complexity];
+  const extraApps = Math.max(0, integrations - 2);
+
+  const lowInvestment =
+    pricing[0] +
+    extraApps * priceRanges[currency].integration[0];
+
+  const highInvestment =
+    pricing[1] +
+    extraApps * priceRanges[currency].integration[1];
+
+  const midpoint =
+    (lowInvestment + highInvestment) / 2;
+
+  const weeklyHours =
+    hours * tasks * efficiency;
+
+  const monthlySavings =
+    weeklyHours * hourlyCost * 4.33;
+
+  const annualSavings =
+    monthlySavings * 12;
+
+  const roi =
+    midpoint > 0
+      ? ((annualSavings - midpoint) / midpoint) * 100
+      : 0;
+
+  const paybackMonths =
+    monthlySavings > 0
+      ? midpoint / monthlySavings
+      : 0;
+
+  document.querySelector("#hours-output").textContent =
+    `${hours % 1 ? hours.toFixed(2) : hours} hr${hours === 1 ? "" : "s"}`;
+
+  document.querySelector("#tasks-output").textContent =
+    `${tasks} task${tasks === 1 ? "" : "s"}`;
+
+  document.querySelector("#cost-output").textContent =
+    `${moneyFormat(hourlyCost, currency)}/hr`;
+
+  document.querySelector("#efficiency-output").textContent =
+    `${Math.round(efficiency * 100)}%`;
+
+  document.querySelector("#currency-pill").textContent =
+    currency;
+
+  document.querySelector("#weekly-hours").textContent =
+    weeklyHours.toFixed(1).replace(".0", "");
+
+  document.querySelector("#monthly-savings").textContent =
+    moneyFormat(monthlySavings, currency);
+
+  document.querySelector("#annual-savings").textContent =
+    moneyFormat(annualSavings, currency);
+
+  document.querySelector("#roi-value").textContent =
+    `${Math.round(roi).toLocaleString()}%`;
+
+  document.querySelector("#investment-range").textContent =
+    `${moneyFormat(lowInvestment, currency)} – ${moneyFormat(highInvestment, currency)}`;
+
+  document.querySelector("#estimate-label").textContent =
+    `${complexity[0].toUpperCase() + complexity.slice(1)} · ${roiInputs.platform.value} · ${integrations} integration${integrations === 1 ? "" : "s"}`;
+
+  if (paybackMonths < 1) {
+    const weeks = Math.max(
+      1,
+      Math.round(paybackMonths * 4.33)
+    );
+
+    document.querySelector("#payback-period").textContent =
+      `${weeks} week${weeks === 1 ? "" : "s"}`;
+  } else {
+    document.querySelector("#payback-period").textContent =
+      `${paybackMonths.toFixed(1)} months`;
+  }
+}
+
+Object.values(roiInputs).forEach(input => {
+  input?.addEventListener("input", () => {
+    if (input === roiInputs.currency) {
+      if (input.value === "USD") {
+        roiInputs.cost.min = "5";
+        roiInputs.cost.max = "150";
+        roiInputs.cost.step = "5";
+        roiInputs.cost.value = "25";
+      } else {
+        roiInputs.cost.min = "100";
+        roiInputs.cost.max = "3000";
+        roiInputs.cost.step = "100";
+        roiInputs.cost.value = "300";
+      }
+    }
+
+    updateRoiCalculator();
+  });
+});
+
+updateRoiCalculator();
