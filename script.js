@@ -105,6 +105,35 @@ const projects = [
     safeguards: "Structured normalization, centralized logging, explicit path conditions, human escalation for urgent requests, and priority-specific responses.",
     images: [{ src: "zapier-email-ops.jpg", caption: "Complete AI email operations Zap", alt: "Zapier AI email operations workflow with Groq, Code, Airtable, Paths, Slack, and Gmail" }]
   }
+  {
+    number: "08",
+    platform: "n8n",
+    platformLabel: "n8n",
+    title: "UrbanNest AI Support & Human Escalation",
+    summary: "An AI support system that answers knowledge-base questions, detects human-review requests, creates or updates Supabase tickets, and notifies the support team through Gmail.",
+    flow: ["Webhook", "Escalation filter", "AI Support Agent", "Vector search", "Supabase ticket", "Gmail alert"],
+    tools: "n8n · Supabase · Gmail · Google Drive · Embeddings",
+    problem: "UrbanNest needed a support workflow that could resolve routine questions automatically while routing urgent or repeated concerns to a human without creating duplicate tickets.",
+    solution: "The main n8n workflow validates incoming webhook data, detects escalation phrases, and connects the AI Support Agent to a Google Drive knowledge-ingestion pipeline and Supabase vector search. A sub-workflow checks the session ID and open-ticket status before updating an existing ticket or creating a new one, then sends a Gmail notification.",
+    safeguards: "Session-aware ticket matching, open-status filtering, human-review routing, structured Supabase records, knowledge-base retrieval, and verified Gmail escalation notifications.",
+    skills: ["AI agent orchestration", "RAG and vector search", "Embeddings and semantic retrieval", "Supabase ticket design", "Session-based duplicate prevention", "Google Drive knowledge ingestion", "Gmail escalation automation", "Webhook and JSON payload handling"],
+    brands: [
+      { src: "assets/brands/n8n.svg", label: "n8n" },
+      { src: "assets/brands/supabase.svg", label: "Supabase" },
+      { src: "assets/brands/googledrive.svg", label: "Google Drive" },
+      { src: "assets/brands/gmail.svg", label: "Gmail" },
+      { src: "assets/brands/openai.svg", label: "AI / Embeddings" }
+    ],
+    images: [
+      { src: "urbanest-main.jpg", caption: "Main UrbanNest support workflow", alt: "n8n UrbanNest support workflow with webhook validation, escalation routing, AI agent, memory, and vector search" },
+      { src: "urbanest-knowledge-ingestion.jpg", caption: "Knowledge-base ingestion pipeline", alt: "Workflow that finds Google Drive documents, extracts text, and loads documents into Supabase Vector Store" },
+      { src: "urbanest-ticketing-subworkflow.jpg", caption: "Human escalation ticket sub-workflow", alt: "n8n sub-workflow that finds, updates, or creates Supabase support tickets and sends Gmail notifications" },
+      { src: "urbanest-escalation-routing.jpg", caption: "Escalation routing and AI agent", alt: "UrbanNest webhook workflow routing human escalation requests to a sub-workflow and AI support agent" },
+      { src: "urbanest-supabase-tickets.jpg", caption: "Verified Supabase ticket records", alt: "Supabase support_tickets table showing ticket-test-004 and ticket-test-005 human review tickets" },
+      { src: "urbanest-knowledge-base.jpg", caption: "UrbanNest knowledge-base documents", alt: "Google Drive folder containing Company FAQ, Services and Pricing, and Support Policies documents" },
+      { src: "urbanest-email-proof.jpg", caption: "Verified human-review email", alt: "Gmail notification showing Human Review Required for session ticket-test-005" }
+    ]
+  },
 ];
 
 const grid = document.querySelector("#projects-grid");
@@ -143,6 +172,15 @@ function openCaseStudy(number) {
       <div class="detail-box"><small>Reliability & safeguards</small><p>${project.safeguards}</p></div>
       <div class="detail-box"><small>Technology</small><p>${project.tools}</p></div>
     </div>
+    ${project.brands ? `
+      <div class="tool-brand-row" aria-label="Tools used">
+        ${project.brands.map(brand => `<span class="tool-brand"><img src="${brand.src}" alt="" /><strong>${brand.label}</strong></span>`).join("")}
+      </div>
+    ` : ""}
+    ${project.skills ? `
+      <h3 class="workflow-heading">Skills demonstrated</h3>
+      <div class="case-skill-list">${project.skills.map(skill => `<span>${skill}</span>`).join("")}</div>
+    ` : ""}
     ${project.video ? `
       <h3 class="workflow-heading">Workflow demo video</h3>
       <figure style="margin:0 0 1.5rem">

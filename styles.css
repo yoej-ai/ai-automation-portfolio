@@ -398,3 +398,15 @@ body { background: #06101c; }
   .calendar-card iframe { height: 720px; border-radius: 11px; }
   .calendly-inline-widget { height: 720px !important; border-radius: 11px; }
 }
+
+/* UrbanNest case-study additions */
+.tool-brand-row { display: flex; flex-wrap: wrap; gap: 9px; margin: 4px 0 30px; }
+.tool-brand { min-height: 42px; padding: 8px 11px; display: inline-flex; align-items: center; gap: 9px; color: #cfe0ef; border: 1px solid rgba(148,170,199,.18); border-radius: 10px; background: rgba(255,255,255,.03); }
+.tool-brand img { width: 22px; height: 22px; object-fit: contain; }
+.tool-brand strong { font-size: 12px; }
+.case-skill-list { display: flex; flex-wrap: wrap; gap: 9px; margin: 0 0 34px; }
+.case-skill-list span { padding: 9px 11px; color: #b8cadc; border: 1px solid rgba(41,214,199,.2); border-radius: 999px; background: rgba(41,214,199,.055); font-size: 12px; }
+@media (max-width: 720px) {
+  .tool-brand-row { gap: 7px; }
+  .tool-brand { flex: 1 1 calc(50% - 7px); }
+}
