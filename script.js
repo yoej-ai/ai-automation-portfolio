@@ -104,7 +104,7 @@ const projects = [
     solution: "Groq analyzes the message, Code steps normalize structured data, Airtable logs the request, and Paths route urgent work to Slack plus Gmail while standard work receives an acknowledgement.",
     safeguards: "Structured normalization, centralized logging, explicit path conditions, human escalation for urgent requests, and priority-specific responses.",
     images: [{ src: "zapier-email-ops.jpg", caption: "Complete AI email operations Zap", alt: "Zapier AI email operations workflow with Groq, Code, Airtable, Paths, Slack, and Gmail" }]
-  }
+  },
   {
     number: "08",
     platform: "n8n",
