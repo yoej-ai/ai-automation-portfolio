@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=12" />
-    <script src="script.js?v=9" defer></script>
+    <link rel="stylesheet" href="styles.css?v=13" />
+    <script src="script.js?v=10" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -202,7 +202,7 @@
         <div class="shell">
           <div class="section-heading booking-heading">
             <div><p class="section-kicker">06 / Book a Call</p><h2>Let’s discuss your next automation.</h2></div>
-            <p>Choose a convenient time or contact me directly. Tell me what is repetitive today and what a better process should achieve.</p>
+            <p>Review the workflow demos, explore the case studies, and identify the first process worth automating.</p>
           </div>
           <div class="booking-grid">
             <div class="booking-info reveal">
@@ -210,20 +210,22 @@
               <h3>Start with a practical conversation.</h3>
               <p>We can review your current process, the tools you already use, and the best first workflow to automate.</p>
             <div class="contact-details">
-                <a href="mailto:yoramon17@gmail.com"><strong>Email</strong><span>yoramon17@gmail.com</span></a>
-                <a href="https://wa.me/639568370023?text=Hi%20Yoej%2C%20I%27d%20like%20to%20discuss%20an%20automation%20project." target="_blank" rel="noopener"><strong>WhatsApp</strong><span>+63 956 837 0023</span></a>
-                <div><strong>Location</strong><span>General Trias, Cavite, Philippines</span></div>
+                <div><strong>Availability</strong><span>Remote projects / freelance</span></div>
+                <div><strong>Focus</strong><span>AI automation, prompt engineering, integrations</span></div>
               </div>
               <div class="contact-actions">
-                <a class="button" href="mailto:yoramon17@gmail.com?subject=Automation%20Project%20Inquiry">Send an email <span aria-hidden="true">↗</span></a>
-                <a class="button button-whatsapp" href="https://wa.me/639568370023?text=Hi%20Yoej%2C%20I%27d%20like%20to%20discuss%20an%20automation%20project." target="_blank" rel="noopener">Message on WhatsApp <span aria-hidden="true">↗</span></a>
+                <a class="button" href="#projects">Explore live demos <span aria-hidden="true">↗</span></a>
+                <a class="button button-ghost" href="#calculator">Estimate project ROI <span aria-hidden="true">↗</span></a>
               </div>
             </div>
             <div class="calendar-card reveal">
-              <div class="calendar-card-head"><div><span>30</span><strong>Schedule a consultation</strong></div><small>30 minutes · Google Meet</small></div>
-              <div class="calendly-inline-widget" data-url="https://calendly.com/yoramon17/ai-automation-consultation?hide_event_type_details=1&amp;hide_gdpr_banner=1&amp;background_color=081321&amp;text_color=eaf2fb&amp;primary_color=8b5cf6" aria-label="Schedule an AI automation consultation"></div>
-              <noscript><a class="button" href="https://calendly.com/yoramon17/ai-automation-consultation" target="_blank" rel="noopener">Open booking calendar</a></noscript>
-              <p>Select an available date and time, then complete your details to confirm the Google Meet session.</p>
+              <div class="calendar-card-head"><div><span>∞</span><strong>Explore a practical first step</strong></div><small>Demo-first discovery</small></div>
+              <div class="contact-preview-card">
+                <strong>Start with a workflow review.</strong>
+                <p>Use the live sandbox demos to see how structured inputs become routed outputs, then use the case studies to define a practical project scope.</p>
+                <a class="button" href="#projects">View sandbox demos <span aria-hidden="true">↗</span></a>
+              </div>
+              <p>Contact details are shared directly with verified prospects after an initial project discussion.</p>
             </div>
           </div>
         </div>
@@ -233,7 +235,7 @@
     <footer class="footer">
       <div class="shell footer-inner">
         <div><strong>Yoej Gramaje Jr.</strong><span>AI Automation & Technical Specialist</span></div>
-        <p>General Trias, Cavite · Philippines / Remote</p>
+        <p>Remote projects · AI automation · Prompt engineering</p>
       </div>
     </footer>
 
@@ -246,6 +248,11 @@
       <button class="image-close" type="button" aria-label="Close image preview">×</button>
       <figure><img id="lightbox-image" alt="" /><figcaption id="lightbox-caption"></figcaption></figure>
     </dialog>
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <dialog class="demo-dialog" id="demo-dialog" aria-labelledby="demo-title">
+      <button class="dialog-close demo-close" type="button" aria-label="Close live demo">×</button>
+      <div class="demo-content" id="demo-content"></div>
+    </dialog>
+
   </body>
 </html>
