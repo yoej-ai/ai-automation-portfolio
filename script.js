@@ -392,7 +392,7 @@ function renderProjects(filter = "all") {
       <h3>${project.title}</h3>
       <p class="project-summary">${project.summary}</p>
       <div class="mini-flow">${project.flow.map(step => `<span>${step}</span>`).join("")}</div>
-      <div class="project-footer"><span class="tool-list">${project.tools}</span><div class="project-actions"><button class="case-button" type="button" data-project="${project.number}">View case study ↗</button>${demoConfigs[project.number] ? `<button class="demo-button" type="button" data-demo="${project.number}">Try live demo ↗</button>` : ""}</div></div>
+      <div class="project-footer"><span class="tool-list">${project.tools}</span><div class="project-actions"><button class="case-button" type="button" data-project="${project.number}">View case study ↗</button>${demoConfigs[project.number] && document.querySelector("#demo-dialog") ? `<button class="demo-button" type="button" data-demo="${project.number}">Try live demo ↗</button>` : ""}</div></div>
     </article>`).join("");
   bindReveals();
 }
@@ -513,7 +513,7 @@ function escapeDemoHtml(value) {
 
 function openDemo(number) {
   const config = demoConfigs[number];
-  if (!config) return;
+  if (!config || !demoDialog || !demoContent) return;
   const fields = config.fields.map(field => field.type === "textarea"
     ? '<label>' + field.label + '<textarea name="' + field.name + '" rows="' + (field.rows || 4) + '" placeholder="' + field.placeholder + '">' + (field.defaultValue || "") + '</textarea></label>'
     : '<label>' + field.label + '<input type="' + field.type + '" name="' + field.name + '" placeholder="' + field.placeholder + '" value="' + (field.defaultValue || "") + '" /></label>'
@@ -577,9 +577,9 @@ dialogContent.addEventListener("click", event => {
 });
 document.querySelector(".image-close").addEventListener("click", () => imageDialog.close());
 imageDialog.addEventListener("click", event => { if (event.target === imageDialog) imageDialog.close(); });
-document.querySelector(".demo-close").addEventListener("click", () => demoDialog.close());
-demoDialog.addEventListener("close", () => document.body.classList.remove("modal-open"));
-demoDialog.addEventListener("click", event => { if (event.target === demoDialog) demoDialog.close(); });
+document.querySelector(".demo-close")?.addEventListener("click", () => demoDialog.close());
+demoDialog?.addEventListener("close", () => document.body.classList.remove("modal-open"));
+demoDialog?.addEventListener("click", event => { if (event.target === demoDialog) demoDialog.close(); });
 
 document.querySelectorAll(".filter-button").forEach(button => {
   button.addEventListener("click", () => {
