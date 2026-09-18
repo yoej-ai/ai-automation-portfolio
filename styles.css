@@ -543,3 +543,113 @@ body { background: #06101c; }
   .demo-submit { width: 100%; }
   .demo-result-item { grid-template-columns: 1fr; gap: 4px; }
 }
+
+
+/* Mobile QA pass: preserve the full portrait and prevent narrow-screen overflow */
+@media (max-width: 720px) {
+  .hero {
+    padding: 108px 0 58px;
+  }
+
+  .hero-grid {
+    gap: 32px;
+  }
+
+  .hero-copy,
+  .hero-visual,
+  .project-card,
+  .dialog-content,
+  .demo-content,
+  .booking-info,
+  .calendar-card {
+    min-width: 0;
+  }
+
+  .hero-visual {
+    min-height: auto;
+    padding: 6px 0 10px;
+  }
+
+  .portrait-card {
+    width: min(82vw, 340px) !important;
+    aspect-ratio: 2 / 3 !important;
+    margin-inline: auto;
+    border-radius: 22px !important;
+  }
+
+  .profile-photo {
+    object-fit: contain !important;
+    object-position: center !important;
+    background: #101c2b;
+  }
+
+  .project-card {
+    min-height: auto;
+  }
+
+  .project-footer {
+    width: 100%;
+  }
+
+  .project-actions {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .case-button,
+  .demo-button {
+    width: 100%;
+    min-height: 44px;
+    text-align: center;
+  }
+
+  .case-dialog,
+  .demo-dialog {
+    width: calc(100% - 16px);
+    max-height: calc(100dvh - 16px);
+    border-radius: 18px;
+  }
+
+  .dialog-content,
+  .demo-content {
+    padding: 54px 16px 24px;
+  }
+
+  .calendar-card-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .calendly-inline-widget {
+    height: 690px !important;
+  }
+
+  .footer-inner p {
+    margin: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .shell {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.55rem, 13.5vw, 3.5rem);
+  }
+
+  .hero-role {
+    font-size: 1.2rem;
+  }
+
+  .portrait-card {
+    width: min(86vw, 330px) !important;
+  }
+
+  .dialog-content,
+  .demo-content {
+    padding-inline: 14px;
+  }
+}
