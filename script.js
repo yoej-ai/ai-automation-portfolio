@@ -296,12 +296,90 @@ const projects = [
   },
 ];
 
+const demoConfigs = {
+  "01": {
+    title: "AI Car Sales Lead Qualification",
+    description: "Enter a sample vehicle inquiry and preview how the workflow turns unstructured text into a lead status, buying intent, and next action.",
+    flow: ["Demo webhook input", "Data validation", "Lead classification", "HOT / WARM / COLD route", "Simulated follow-up"],
+    fields: [
+      { name: "customer_name", label: "Customer name", type: "text", placeholder: "Alex Santos", defaultValue: "Alex Santos" },
+      { name: "message", label: "Vehicle inquiry", type: "textarea", rows: 5, placeholder: "I am interested in a Ford Ranger. My budget is PHP 1.2M and I want to buy this month.", defaultValue: "I am interested in a Ford Ranger. My budget is PHP 1.2M and I want to buy this month." }
+    ],
+    run(values) {
+      const message = String(values.message || "");
+      const text = message.toLowerCase();
+      const hot = /buy|purchase|budget|ready|today|this month|finance|urgent/.test(text);
+      const warm = /interested|looking|compare|test drive|price|available/.test(text);
+      const status = hot ? "HOT" : warm ? "WARM" : "COLD";
+      const vehicleMatch = message.match(/(?:ford|toyota|honda|mitsubishi|ranger|hilux|civic|fortuner)[a-z0-9 -]*/i);
+      const budgetMatch = message.match(/(?:₱|php)\s?[\d,.]+(?:\s?[mk])?|[\d,.]+\s?(?:m|million)/i);
+      return {
+        lead_status: status,
+        customer: values.customer_name || "Demo customer",
+        vehicle_interest: vehicleMatch ? vehicleMatch[0].trim() : "Vehicle not specified",
+        budget: budgetMatch ? budgetMatch[0] : "Not provided",
+        urgency: status === "HOT" ? "High" : status === "WARM" ? "Medium" : "Low",
+        next_action: status === "HOT" ? "Immediate sales follow-up (simulated Gmail)" : status === "WARM" ? "Scheduled follow-up (simulated Gmail)" : "Nurture sequence (simulated Gmail)"
+      };
+    }
+  },
+  "03": {
+    title: "HR Evaluation & Job Posting",
+    description: "Use a sample candidate summary to preview structured screening output. The demo always keeps the final hiring decision with a human reviewer.",
+    flow: ["Demo application input", "Candidate data extraction", "Role-fit scoring", "Candidate routing", "Human-review handoff"],
+    fields: [
+      { name: "candidate_name", label: "Candidate name", type: "text", placeholder: "Jamie Cruz", defaultValue: "Jamie Cruz" },
+      { name: "role", label: "Position", type: "text", placeholder: "AI Automation Specialist", defaultValue: "AI Automation Specialist" },
+      { name: "cv_summary", label: "CV / experience summary", type: "textarea", rows: 6, placeholder: "3 years of experience with n8n, APIs, JSON, JavaScript, and workflow automation.", defaultValue: "3 years of experience with n8n, APIs, JSON, JavaScript, and workflow automation." }
+    ],
+    run(values) {
+      const text = String(values.cv_summary || "").toLowerCase();
+      const keywords = ["automation", "n8n", "make", "zapier", "api", "json", "javascript", "workflow", "project"];
+      const matches = keywords.filter(keyword => text.includes(keyword)).length;
+      const score = Math.min(95, 45 + matches * 7);
+      return {
+        candidate: values.candidate_name || "Demo candidate",
+        position: values.role || "Demo position",
+        match_score: score + "%",
+        evaluation: score >= 75 ? "Strong match for human review" : score >= 55 ? "Potential match — manual review" : "Needs further review",
+        next_step: "Human review required — questionnaire and interview scheduling are simulated"
+      };
+    }
+  },
+  "05": {
+    title: "AI Customer Support Ticket Triage",
+    description: "Submit a sample support request and preview how the workflow categorizes priority, logs a ticket, and chooses an escalation path.",
+    flow: ["Demo support request", "AI-style classification", "Structured JSON", "Priority router", "Simulated acknowledgement / escalation"],
+    fields: [
+      { name: "customer_name", label: "Customer name", type: "text", placeholder: "Taylor Reyes", defaultValue: "Taylor Reyes" },
+      { name: "request", label: "Support request", type: "textarea", rows: 6, placeholder: "URGENT: I cannot access my account and I need help before today.", defaultValue: "URGENT: I cannot access my account and I need help before today." }
+    ],
+    run(values) {
+      const text = String(values.request || "").toLowerCase();
+      const category = /refund|payment|invoice|charge/.test(text) ? "Billing" : /login|password|access|account/.test(text) ? "Account access" : /shipping|delivery|order/.test(text) ? "Order / delivery" : "General support";
+      const urgent = /urgent|emergency|down|can't|cannot|blocked|fraud|security/.test(text);
+      const priority = urgent ? "URGENT" : /when|how|question|status/.test(text) ? "NORMAL" : "LOW";
+      return {
+        ticket_id: "DEMO-001",
+        customer: values.customer_name || "Demo customer",
+        category,
+        priority,
+        acknowledgement: "Simulated Gmail acknowledgement",
+        escalation: urgent ? "Simulated Slack / email escalation" : "No escalation — standard support queue",
+        human_review: "Required for final resolution"
+      };
+    }
+  }
+};
+
 const grid = document.querySelector("#projects-grid");
 const caseDialog = document.querySelector("#case-dialog");
 const dialogContent = document.querySelector("#dialog-content");
 const imageDialog = document.querySelector("#image-dialog");
 const lightboxImage = document.querySelector("#lightbox-image");
 const lightboxCaption = document.querySelector("#lightbox-caption");
+const demoDialog = document.querySelector("#demo-dialog");
+const demoContent = document.querySelector("#demo-content");
 
 function renderProjects(filter = "all") {
   const visible = filter === "all" ? projects : projects.filter(project => project.platform === filter);
@@ -314,7 +392,7 @@ function renderProjects(filter = "all") {
       <h3>${project.title}</h3>
       <p class="project-summary">${project.summary}</p>
       <div class="mini-flow">${project.flow.map(step => `<span>${step}</span>`).join("")}</div>
-      <div class="project-footer"><span class="tool-list">${project.tools}</span><button class="case-button" type="button" data-project="${project.number}">View case study ↗</button></div>
+      <div class="project-footer"><span class="tool-list">${project.tools}</span><div class="project-actions"><button class="case-button" type="button" data-project="${project.number}">View case study ↗</button>${demoConfigs[project.number] ? `<button class="demo-button" type="button" data-demo="${project.number}">Try live demo ↗</button>` : ""}</div></div>
     </article>`).join("");
   bindReveals();
 }
@@ -423,8 +501,58 @@ function openCaseStudy(number) {
   caseDialog.showModal();
   document.body.classList.add("modal-open");
 }
+function escapeDemoHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[character]));
+}
+
+function openDemo(number) {
+  const config = demoConfigs[number];
+  if (!config) return;
+  const fields = config.fields.map(field => field.type === "textarea"
+    ? '<label>' + field.label + '<textarea name="' + field.name + '" rows="' + (field.rows || 4) + '" placeholder="' + field.placeholder + '">' + (field.defaultValue || "") + '</textarea></label>'
+    : '<label>' + field.label + '<input type="' + field.type + '" name="' + field.name + '" placeholder="' + field.placeholder + '" value="' + (field.defaultValue || "") + '" /></label>'
+  ).join("");
+  const flow = config.flow.map(step => '<span class="demo-flow-chip">' + step + '</span>').join("");
+  demoContent.innerHTML = [
+    '<span class="demo-kicker">Free public sandbox · Simulated workflow</span>',
+    '<h2 id="demo-title">' + config.title + '</h2>',
+    '<p class="demo-intro">' + config.description + '</p>',
+    '<div class="demo-notice"><strong>Demo mode only</strong><span>This preview uses sample data and local rule-based logic. It does not call Gmail, Calendar, Slack, Facebook, APIs, or private workflows.</span></div>',
+    '<div class="demo-flow">' + flow + '</div>',
+    '<form class="demo-form" id="demo-form">' + fields + '<button class="button demo-submit" type="submit">Run demo workflow <span aria-hidden="true">↗</span></button></form>',
+    '<div class="demo-result" id="demo-result" aria-live="polite"><strong>Structured output</strong><p>Submit the sample input to preview the routed result.</p></div>',
+    '<p class="demo-footnote">Portfolio sandbox · no credentials, webhooks, real messages, or customer records are used.</p>'
+  ].join("");
+  demoDialog.showModal();
+  document.body.classList.add("modal-open");
+  const form = document.querySelector("#demo-form");
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    const values = Object.fromEntries(new FormData(form).entries());
+    const output = config.run(values);
+    const resultHtml = Object.entries(output).map(([key, value]) => [
+      '<div class="demo-result-item"><span>',
+      escapeDemoHtml(key.replace(/_/g, " ")),
+      '</span><strong>',
+      escapeDemoHtml(value),
+      '</strong></div>'
+    ].join("")).join("");
+    document.querySelector("#demo-result").innerHTML = '<strong>Structured output</strong><div class="demo-result-grid">' + resultHtml + '</div><p class="demo-result-note">This is a simulated result for portfolio demonstration. A production workflow would pass validated data to the connected tools.</p>';
+  });
+}
 
 grid.addEventListener("click", event => {
+  const demoButton = event.target.closest("[data-demo]");
+  if (demoButton) {
+    openDemo(demoButton.dataset.demo);
+    return;
+  }
   const button = event.target.closest("[data-project]");
   if (button) openCaseStudy(button.dataset.project);
 });
@@ -449,6 +577,9 @@ dialogContent.addEventListener("click", event => {
 });
 document.querySelector(".image-close").addEventListener("click", () => imageDialog.close());
 imageDialog.addEventListener("click", event => { if (event.target === imageDialog) imageDialog.close(); });
+document.querySelector(".demo-close").addEventListener("click", () => demoDialog.close());
+demoDialog.addEventListener("close", () => document.body.classList.remove("modal-open"));
+demoDialog.addEventListener("click", event => { if (event.target === demoDialog) demoDialog.close(); });
 
 document.querySelectorAll(".filter-button").forEach(button => {
   button.addEventListener("click", () => {
