@@ -311,15 +311,49 @@ const demoConfigs = {
       const hot = /buy|purchase|budget|ready|today|this month|finance|urgent/.test(text);
       const warm = /interested|looking|compare|test drive|price|available/.test(text);
       const status = hot ? "HOT" : warm ? "WARM" : "COLD";
-      const vehicleMatch = message.match(/(?:ford|toyota|honda|mitsubishi|ranger|hilux|civic|fortuner)[a-z0-9 -]*/i);
-      const budgetMatch = message.match(/(?:₱|php)\s?[\d,.]+(?:\s?[mk])?|[\d,.]+\s?(?:m|million)/i);
+      const vehicleMatch = message.match(/(?:ford|toyota|honda|mitsubishi|ranger|hilux|civic|fortuner)[a-z0-9 -]*?(?=\s+(?:budget|price|for|at)\b|,|$)/i);
+      const budgetMatch = message.match(/budget\s*(?:is\s*)?(?:₱|php|\$)?\s*[\d,.]+\s*(?:k|m|million|thousand)?/i);
+      const budget = budgetMatch ? budgetMatch[0].replace(/^budget\s*(?:is\s*)?/i, "").trim() : "Not provided";
+      const budgetParts = budget.match(/([\d,.]+)\s*(k|m|million|thousand)?/i);
+      const normalizedBudget = budgetParts ? (() => {
+        const amount = Number(budgetParts[1].replace(/,/g, ""));
+        const suffix = (budgetParts[2] || "").toLowerCase();
+        const multiplier = suffix === "k" || suffix === "thousand" ? 1000 : suffix === "m" || suffix === "million" ? 1000000 : 1;
+        return "PHP " + new Intl.NumberFormat("en-PH", { maximumFractionDigits: 0 }).format(amount * multiplier);
+      })() : budget;
       return {
         lead_status: status,
         customer: values.customer_name || "Demo customer",
         vehicle_interest: vehicleMatch ? vehicleMatch[0].trim() : "Vehicle not specified",
-        budget: budgetMatch ? budgetMatch[0] : "Not provided",
+        budget: budget === "Not provided" ? budget : normalizedBudget,
         urgency: status === "HOT" ? "High" : status === "WARM" ? "Medium" : "Low",
         next_action: status === "HOT" ? "Immediate sales follow-up (simulated Gmail)" : status === "WARM" ? "Scheduled follow-up (simulated Gmail)" : "Nurture sequence (simulated Gmail)"
+      };
+    }
+  },
+  "02": {
+    title: "AI Dental Clinic Automation",
+    description: "Try a safe clinic assistant preview for booking, appointment checks, cancellations, and rescheduling. All tools are simulated and no real patient record is accessed.",
+    flow: ["Demo patient request", "Intent detection", "Clinic-rule validation", "Availability / management route", "Simulated confirmation"],
+    fields: [
+      { name: "patient_name", label: "Patient name", type: "text", placeholder: "Morgan Lee", defaultValue: "Morgan Lee" },
+      { name: "request", label: "Appointment request", type: "textarea", rows: 6, placeholder: "I need a dental cleaning next Tuesday at 10 AM.", defaultValue: "I need a dental cleaning next Tuesday at 10 AM." }
+    ],
+    run(values) {
+      const request = String(values.request || "");
+      const text = request.toLowerCase();
+      const action = /cancel/.test(text) ? "Cancel appointment" : /resched|move|change the time/.test(text) ? "Reschedule appointment" : /check|status|existing appointment/.test(text) ? "Check appointment status" : "Book appointment";
+      const service = /clean/.test(text) ? "Dental cleaning" : /extract|tooth|molar/.test(text) ? "Dental treatment consultation" : "General dental appointment";
+      const timeMatch = request.match(/(?:next|this)\s+(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)(?:\s+at\s+[\d: ]+(?:am|pm)?)?/i) || request.match(/at\s+[\d: ]+(?:am|pm)/i);
+      const managementAction = action !== "Book appointment";
+      return {
+        action,
+        patient: values.patient_name || "Demo patient",
+        service,
+        requested_time: timeMatch ? timeMatch[0].trim() : "Time not specified",
+        validation: managementAction ? "Appointment ID or email required before management action" : "Input validated — slot check simulated",
+        next_step: managementAction ? "ManageAppointment tool (simulated)" : "GetDentalSlots → Create Appointment (simulated)",
+        safety_note: "No real calendar event, patient record, or email was created"
       };
     }
   },
