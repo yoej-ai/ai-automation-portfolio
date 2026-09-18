@@ -380,6 +380,38 @@ const demoConfigs = {
       };
     }
   },
+  "04": {
+    title: "AI E-commerce Order Fulfillment",
+    description: "Submit a sample order and preview duplicate prevention, payment routing, AI risk assessment, inventory validation, and fulfillment status.",
+    flow: ["Demo order input", "Duplicate check", "Payment route", "AI risk assessment", "Inventory validation", "Fulfillment decision"],
+    fields: [
+      { name: "order_id", label: "Order ID", type: "text", placeholder: "DEMO-1001", defaultValue: "DEMO-1001" },
+      { name: "payment_status", label: "Payment status", type: "text", placeholder: "Paid", defaultValue: "Paid" },
+      { name: "order_items", label: "Order items", type: "textarea", rows: 4, placeholder: "2x Wireless Mouse, 1x Keyboard", defaultValue: "2x Wireless Mouse, 1x Keyboard" },
+      { name: "inventory_snapshot", label: "Demo inventory snapshot", type: "textarea", rows: 4, placeholder: "Wireless Mouse: 5 in stock; Keyboard: 3 in stock", defaultValue: "Wireless Mouse: 5 in stock; Keyboard: 3 in stock" }
+    ],
+    run(values) {
+      const paymentText = String(values.payment_status || "").toLowerCase();
+      const inventoryText = String(values.inventory_snapshot || "").toLowerCase();
+      const orderText = String(values.order_items || "");
+      const paymentRoute = /paid|complete|confirmed|success/.test(paymentText) ? "Paid" : "Awaiting Payment";
+      const riskSignal = /out of stock|low stock|0 in stock|backorder|mismatch|manual review/.test(inventoryText + " " + orderText);
+      const fulfillmentStatus = paymentRoute !== "Paid" ? "Awaiting Payment" : riskSignal ? "Needs Review" : "FULFILLED";
+      const itemCount = (orderText.match(/\d+\s*x/gi) || []).length || (orderText.trim() ? orderText.split(/[,;\n]/).filter(Boolean).length : 0);
+      return {
+        order_id: values.order_id || "DEMO-ORDER",
+        duplicate_check: "Passed — demo datastore lookup",
+        order_items_detected: itemCount + " item line(s)",
+        payment_route: paymentRoute,
+        ai_order_summary: riskSignal ? "Potential inventory exception detected" : "Order appears ready for fulfillment",
+        ai_risk_assessment: riskSignal ? "MEDIUM — manual review recommended" : "LOW — no demo exception detected",
+        inventory_decision: riskSignal ? "Needs Review" : "Inventory check passed (simulated)",
+        fulfillment_status: fulfillmentStatus,
+        next_action: fulfillmentStatus === "FULFILLED" ? "Create fulfillment record (simulated)" : fulfillmentStatus === "Awaiting Payment" ? "Wait for payment confirmation (simulated)" : "Route to manual review (simulated)",
+        side_effects: "Simulated only — no Airtable, payment, inventory, or Gmail update"
+      };
+    }
+  },
   "05": {
     title: "AI Customer Support Ticket Triage",
     description: "Submit a sample support request and preview how the workflow categorizes priority, logs a ticket, and chooses an escalation path.",
