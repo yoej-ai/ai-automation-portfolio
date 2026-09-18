@@ -1,16 +1,63 @@
 const projects = [
   {
-    number: "01",
-    platform: "n8n",
-    platformLabel: "n8n",
-    title: "AI Car Sales Lead Qualification",
-    summary: "Captures inbound vehicle-sales leads, scores them with AI, stores them in a CRM sheet, and routes HOT, WARM, and COLD follow-up paths.",
-    flow: ["Webhook", "Groq AI", "Code parsing", "Sheets CRM", "Lead routing", "Gmail follow-up"],
-    tools: "12 nodes · Groq · Google Sheets · Gmail",
-    problem: "Inbound vehicle-sales leads need consistent qualification, organized records, and different follow-up timing based on buying intent.",
-    solution: "A webhook passes each lead to a Groq-powered AI agent. Code normalizes the structured result, Google Sheets records it, and a Switch node routes HOT, WARM, and COLD paths.",
-    safeguards: "Structured parsing, explicit category routing, immediate HOT alerts, timed WARM follow-up, and separate COLD nurturing.",
-    images: [{ src: "car-sales-lead.jpg", caption: "Complete n8n lead qualification workflow", alt: "n8n workflow for AI car sales lead qualification with HOT, WARM, and COLD routes" }]
+    "number": "01",
+    "platform": "n8n",
+    "platformLabel": "n8n",
+    "title": "AI Car Sales Lead Qualification & Automated Follow-Up",
+    "summary": "An AI-powered lead qualification workflow designed to organize vehicle-sales inquiries, evaluate lead quality, and route each prospect to the appropriate follow-up action.",
+    "flow": [
+      "Webhook receives the customer inquiry",
+      "Data is cleaned and validated",
+      "AI analyzes the customer’s intent, vehicle interest, budget, and urgency",
+      "Lead is categorized as HOT, WARM, or COLD",
+      "Lead details are stored in Google Sheets as a CRM record",
+      "The appropriate follow-up path is selected",
+      "Gmail sends the relevant follow-up message"
+    ],
+    "tools": "12 nodes · Groq AI · Google Sheets · Gmail",
+    "problem": "Vehicle inquiries often arrive with incomplete or unstructured information. Without a consistent qualification process, sales teams may spend too much time reviewing leads manually and may miss high-intent prospects.",
+    "solution": "A webhook receives the inquiry, code parsing normalizes the data, Groq AI evaluates the lead, Google Sheets stores the CRM record, and a Switch node routes the correct follow-up path.",
+    "safeguards": "Structured validation, explicit category routing, and fallback handling for incomplete AI responses.",
+    "caseStudy": {
+      "overview": "An AI-powered lead qualification workflow designed to organize vehicle-sales inquiries, evaluate lead quality, and route each prospect to the appropriate follow-up action.",
+      "challenge": "Vehicle inquiries often arrive with incomplete or unstructured information. Without a consistent qualification process, sales teams may spend too much time reviewing leads manually and may miss high-intent prospects.",
+      "workflow": [
+        "Webhook receives the customer inquiry",
+        "Data is cleaned and validated",
+        "AI analyzes the customer’s intent, vehicle interest, budget, and urgency",
+        "Lead is categorized as HOT, WARM, or COLD",
+        "Lead details are stored in Google Sheets as a CRM record",
+        "The appropriate follow-up path is selected",
+        "Gmail sends the relevant follow-up message"
+      ],
+      "aiLogic": "The AI reviews the inquiry and returns structured information instead of a free-form response. The workflow uses the AI result to support lead classification and routing while keeping the process organized and consistent.",
+      "integrations": [
+        "n8n",
+        "Webhooks",
+        "Groq AI",
+        "Google Sheets",
+        "Gmail",
+        "Code parsing",
+        "JSON data handling",
+        "Lead routing"
+      ],
+      "safeguards": [
+        "Validates incoming lead information",
+        "Uses structured AI output for predictable routing",
+        "Separates HOT, WARM, and COLD follow-up paths",
+        "Includes parsing and fallback logic for incomplete responses",
+        "Keeps lead information centralized for easier review"
+      ],
+      "result": "The workflow transforms unstructured inquiries into organized sales records and gives each lead a clear next action. It helps reduce manual sorting, improve follow-up consistency, and give sales teams better visibility into incoming prospects.",
+      "limitations": "AI classification supports follow-up routing but does not replace sales judgment, inventory confirmation, pricing approval, or final customer communication decisions."
+    },
+    "images": [
+      {
+        "src": "car-sales-lead.jpg",
+        "caption": "Complete n8n lead qualification workflow",
+        "alt": "n8n workflow for AI car sales lead qualification with HOT, WARM, and COLD routes"
+      }
+    ]
   },
   {
     number: "02",
@@ -31,17 +78,70 @@ const projects = [
     ]
   },
   {
-    number: "03",
-    platform: "n8n",
-    platformLabel: "n8n",
-    title: "HR Evaluation & Job Posting",
-    summary: "Moves applicants from form submission and CV extraction through AI evaluation, questionnaires, communication, and interview scheduling.",
-    flow: ["Application form", "Drive upload", "CV extraction", "AI evaluation", "Candidate route", "Interview coordination"],
-    tools: "37 nodes · OpenAI · Airtable · Drive · Calendar",
-    problem: "Candidate intake, CV review, role criteria, questionnaires, communication, and scheduling often become disconnected manual steps.",
-    solution: "The workflow stores the applicant and CV, extracts the document, evaluates fit against Airtable job records, and routes potential hires and rejections through dedicated branches.",
-    safeguards: "Structured output parsers, Airtable source records, explicit hiring branches, stored questionnaire answers, and controlled calendar tooling.",
-    images: [{ src: "hr-evaluation.jpg", caption: "Complete HR evaluation and interview workflow", alt: "Large n8n HR workflow for CV intake, AI evaluation, questionnaires, email, and calendar scheduling" }]
+    "number": "03",
+    "platform": "n8n",
+    "platformLabel": "n8n",
+    "title": "HR Evaluation & Job Posting Automation",
+    "summary": "An AI-assisted HR workflow that helps manage job-posting information, applicant documents, candidate evaluation, communication, and interview scheduling.",
+    "flow": [
+      "Job or application form is submitted",
+      "Candidate and position details are collected",
+      "CV is uploaded and processed from Google Drive",
+      "Candidate information is extracted and structured",
+      "OpenAI evaluates the application against the job requirements",
+      "Candidate information is recorded in Airtable",
+      "Applicants are routed based on the evaluation result",
+      "Questionnaire or follow-up communication is sent",
+      "Qualified candidates are coordinated through Google Calendar"
+    ],
+    "tools": "37 nodes · OpenAI · Airtable · Google Drive · Google Calendar · Forms · Gmail",
+    "problem": "Recruitment teams often manage job requirements, CV files, candidate screening, email communication, and interview scheduling across different tools. This can lead to repetitive work, inconsistent evaluations, and delayed communication.",
+    "solution": "The workflow collects the application, extracts the CV, evaluates fit against the defined role requirements, records the candidate in Airtable, routes the result, sends the next communication, and coordinates qualified candidates through Google Calendar.",
+    "safeguards": "Structured evaluation fields, human-controlled hiring decisions, explicit candidate routing, and connected calendar scheduling.",
+    "caseStudy": {
+      "overview": "An AI-assisted HR workflow that helps manage job-posting information, applicant documents, candidate evaluation, communication, and interview scheduling.",
+      "challenge": "Recruitment teams often manage job requirements, CV files, candidate screening, email communication, and interview scheduling across different tools. This can lead to repetitive work, inconsistent evaluations, and delayed communication.",
+      "workflow": [
+        "Job or application form is submitted",
+        "Candidate and position details are collected",
+        "CV is uploaded and processed from Google Drive",
+        "Candidate information is extracted and structured",
+        "OpenAI evaluates the application against the job requirements",
+        "Candidate information is recorded in Airtable",
+        "Applicants are routed based on the evaluation result",
+        "Questionnaire or follow-up communication is sent",
+        "Qualified candidates are coordinated through Google Calendar"
+      ],
+      "aiLogic": "The AI compares candidate information with the defined role requirements and returns a structured evaluation. The result supports the HR workflow but does not replace final human decision-making.",
+      "integrations": [
+        "n8n",
+        "OpenAI",
+        "Airtable",
+        "Google Drive",
+        "Google Calendar",
+        "Forms",
+        "Gmail",
+        "CV extraction",
+        "JSON structured outputs"
+      ],
+      "safeguards": [
+        "Separates candidate data from evaluation results",
+        "Uses structured fields for consistent screening",
+        "Routes candidates according to defined conditions",
+        "Keeps the final hiring decision with a human reviewer",
+        "Organizes interview scheduling through a connected calendar workflow",
+        "Reduces duplicate manual encoding across HR tools"
+      ],
+      "result": "The workflow creates a more organized recruitment process from application submission to interview coordination. It helps HR teams spend less time on repetitive administrative work and more time reviewing qualified candidates.",
+      "limitations": "AI evaluation supports screening and routing, but final hiring decisions, interview outcomes, and candidate communications remain subject to human review and company policy."
+    },
+    "images": [
+      {
+        "src": "hr-evaluation.jpg",
+        "caption": "Complete HR evaluation and interview workflow",
+        "alt": "Large n8n HR workflow for CV intake, AI evaluation, questionnaires, email, and calendar scheduling"
+      }
+    ]
   },
   {
     number: "04",
@@ -62,21 +162,81 @@ const projects = [
     images: [{ src: "make-ecommerce.png", caption: "Complete Make.com e-commerce scenario", alt: "Panoramic Make.com workflow for e-commerce order fulfillment and inventory management" }]
   },
   {
-    number: "05",
-    platform: "make",
-    platformLabel: "Make.com",
-    title: "AI Customer Support Ticket Triage",
-    summary: "Turns support requests into structured tickets, logs them, escalates urgent issues, and sends priority-appropriate acknowledgements.",
-    flow: ["Support webhook", "Groq triage", "JSON parser", "Sheets log", "Priority router", "Slack / Gmail"],
-    tools: "8 modules · Groq · Google Sheets · Slack · Gmail",
-    problem: "Incoming support requests must be classified, recorded, acknowledged, and escalated without allowing urgent incidents to sit behind routine messages.",
-    solution: "Groq returns a structured ticket with category, severity, priority, sentiment, summary, and recommended action. A router separates URGENT from NORMAL and LOW requests.",
-    safeguards: "Controlled JSON schema, centralized ticket log, explicit priority filters, immediate human escalation, and customer acknowledgement paths.",
-    images: [
-      { src: "make-support.jpg", caption: "Complete Make.com support triage scenario", alt: "Make.com workflow for AI support triage with Sheets, router, Slack, and Gmail" },
-      { src: "make-support-slack.jpg", caption: "Urgent Slack escalation output", alt: "Slack urgent customer support ticket generated by the Make.com workflow" },
-      { src: "make-support-email.jpg", caption: "Urgent customer acknowledgement", alt: "Customer support acknowledgement email generated by the workflow" },
-      { src: "make-support-sheet.jpg", caption: "Structured Google Sheets ticket log", alt: "Google Sheets row containing structured AI customer support ticket data" }
+    "number": "05",
+    "platform": "make",
+    "platformLabel": "Make.com",
+    "title": "AI Customer Support Ticket Triage & Escalation",
+    "summary": "An AI-powered support workflow that converts incoming customer requests into structured tickets, assigns priority, records the request, and escalates urgent issues to the appropriate team.",
+    "flow": [
+      "Customer support request is received through a webhook",
+      "Request content is sent to the AI triage step",
+      "AI identifies the request category, urgency, and priority",
+      "Output is converted into structured JSON",
+      "Ticket information is logged in Google Sheets",
+      "A priority router selects the correct action",
+      "Customer acknowledgement is sent through Gmail",
+      "Urgent or high-priority cases are escalated through Slack or email"
+    ],
+    "tools": "8 modules · Groq AI · Google Sheets · Slack · Gmail",
+    "problem": "Support requests can arrive in different formats and may vary in urgency. Without a consistent triage process, urgent concerns can be delayed and support teams may need to manually review every request.",
+    "solution": "A webhook receives the request, Groq AI returns structured triage fields, a JSON parser normalizes the result, Google Sheets logs the ticket, and a priority router selects the acknowledgement or escalation path.",
+    "safeguards": "Structured ticket data, defined priority routing, centralized logging, and human escalation for urgent cases.",
+    "caseStudy": {
+      "overview": "An AI-powered support workflow that converts incoming customer requests into structured tickets, assigns priority, records the request, and escalates urgent issues to the appropriate team.",
+      "challenge": "Support requests can arrive in different formats and may vary in urgency. Without a consistent triage process, urgent concerns can be delayed and support teams may need to manually review every request.",
+      "workflow": [
+        "Customer support request is received through a webhook",
+        "Request content is sent to the AI triage step",
+        "AI identifies the request category, urgency, and priority",
+        "Output is converted into structured JSON",
+        "Ticket information is logged in Google Sheets",
+        "A priority router selects the correct action",
+        "Customer acknowledgement is sent through Gmail",
+        "Urgent or high-priority cases are escalated through Slack or email"
+      ],
+      "aiLogic": "The AI analyzes each request and returns structured fields that can be used by the automation. Instead of allowing the AI to directly control the entire process, the workflow uses defined routing rules for consistent handling.",
+      "integrations": [
+        "Make.com",
+        "Webhooks",
+        "Groq AI",
+        "JSON parser",
+        "Google Sheets",
+        "Slack",
+        "Gmail",
+        "Priority routing"
+      ],
+      "safeguards": [
+        "Converts AI output into structured ticket data",
+        "Uses defined priority-routing conditions",
+        "Logs support requests for tracking and review",
+        "Separates normal requests from urgent cases",
+        "Sends human escalation alerts when a request requires attention",
+        "Maintains a clear record of the support workflow"
+      ],
+      "result": "The workflow gives support teams a consistent way to receive, classify, record, and escalate customer requests. It improves visibility, reduces manual triage, and helps urgent issues reach the right person faster.",
+      "limitations": "AI triage depends on the quality of the incoming request and structured output. Support teams still need to verify high-impact decisions and handle exceptions."
+    },
+    "images": [
+      {
+        "src": "make-support.jpg",
+        "caption": "Complete Make.com support triage scenario",
+        "alt": "Make.com workflow for AI support triage with Sheets, router, Slack, and Gmail"
+      },
+      {
+        "src": "make-support-slack.jpg",
+        "caption": "Urgent Slack escalation output",
+        "alt": "Slack urgent customer support ticket generated by the Make.com workflow"
+      },
+      {
+        "src": "make-support-email.jpg",
+        "caption": "Urgent customer acknowledgement",
+        "alt": "Customer support acknowledgement email generated by the workflow"
+      },
+      {
+        "src": "make-support-sheet.jpg",
+        "caption": "Structured Google Sheets ticket log",
+        "alt": "Google Sheets row containing structured AI customer support ticket data"
+      }
     ]
   },
   {
@@ -162,43 +322,104 @@ function renderProjects(filter = "all") {
 function openCaseStudy(number) {
   const project = projects.find(item => item.number === number);
   if (!project) return;
-  dialogContent.innerHTML = `
-    <span class="dialog-kicker">Case study ${project.number} · ${project.platformLabel} · Completed</span>
-    <h2 id="dialog-title">${project.title}</h2>
-    <p class="dialog-intro">${project.summary}</p>
-    <div class="dialog-grid">
-      <div class="detail-box"><small>Business problem</small><p>${project.problem}</p></div>
-      <div class="detail-box"><small>Solution architecture</small><p>${project.solution}</p></div>
-      <div class="detail-box"><small>Reliability & safeguards</small><p>${project.safeguards}</p></div>
-      <div class="detail-box"><small>Technology</small><p>${project.tools}</p></div>
-    </div>
-    ${project.brands ? `
-      <div class="tool-brand-row" aria-label="Tools used">
-        ${project.brands.map(brand => `<span class="tool-brand"><img src="${brand.src}" alt="" /><strong>${brand.label}</strong></span>`).join("")}
-      </div>
-    ` : ""}
-    ${project.skills ? `
-      <h3 class="workflow-heading">Skills demonstrated</h3>
-      <div class="case-skill-list">${project.skills.map(skill => `<span>${skill}</span>`).join("")}</div>
-    ` : ""}
-    ${project.video ? `
-      <h3 class="workflow-heading">Workflow demo video</h3>
-      <figure style="margin:0 0 1.5rem">
-        <video controls preload="metadata" poster="${project.video.poster}" style="display:block;width:100%;aspect-ratio:16/9;background:#050b14;border:1px solid rgba(148,163,184,.22);border-radius:16px" aria-label="${project.title} workflow demonstration">
-          <source src="${project.video.src}" type="video/mp4" />
-          Your browser does not support HTML video.
-        </video>
-        <figcaption style="margin-top:.65rem;color:#9fb2c9;font-size:.88rem">${project.video.caption}</figcaption>
-      </figure>
-    ` : ""}
-    <h3 class="workflow-heading">Actual workflow evidence</h3>
-    <div class="workflow-gallery">
-      ${project.images.map((image, index) => `
-        <button class="workflow-shot" type="button" data-src="${image.src}" data-caption="${image.caption}" data-alt="${image.alt}">
-          <img src="${image.src}" alt="${image.alt}" loading="lazy" />
-          <span>${index + 1}. ${image.caption} · Click to enlarge</span>
-        </button>`).join("")}
-    </div>`;
+
+  const detailedContent = project.caseStudy ? [
+    '<div class="case-overview"><small>Project overview</small><p>',
+    project.caseStudy.overview,
+    '</p></div>',
+    '<div class="dialog-grid case-study-top-grid">',
+      '<div class="detail-box"><small>The challenge</small><p>',
+      project.caseStudy.challenge,
+      '</p></div>',
+      '<div class="detail-box"><small>Tools and integrations</small><div class="case-tag-list">',
+      project.caseStudy.integrations.map(tool => '<span>' + tool + '</span>').join(""),
+      '</div></div>',
+    '</div>',
+    '<h3 class="workflow-heading">Workflow architecture</h3>',
+    '<ol class="workflow-steps">',
+      project.caseStudy.workflow.map((step, index) => '<li><span class="workflow-step-number">' + String(index + 1).padStart(2, "0") + '</span><div><strong>' + step + '</strong></div></li>').join(""),
+    '</ol>',
+    '<div class="dialog-grid case-study-text-grid">',
+      '<div class="detail-box"><small>AI logic</small><p>',
+      project.caseStudy.aiLogic,
+      '</p></div>',
+      '<div class="detail-box"><small>Reliability and safeguards</small><ul class="case-list">',
+      project.caseStudy.safeguards.map(item => '<li>' + item + '</li>').join(""),
+      '</ul></div>',
+    '</div>',
+    '<div class="dialog-grid case-study-outcome-grid">',
+      '<div class="detail-box case-result-box"><small>Result</small><p>',
+      project.caseStudy.result,
+      '</p></div>',
+      '<div class="detail-box"><small>Limitations and human review</small><p>',
+      project.caseStudy.limitations,
+      '</p></div>',
+    '</div>'
+  ].join("") : [
+    '<div class="dialog-grid">',
+      '<div class="detail-box"><small>Business problem</small><p>' + project.problem + '</p></div>',
+      '<div class="detail-box"><small>Solution architecture</small><p>' + project.solution + '</p></div>',
+      '<div class="detail-box"><small>Reliability & safeguards</small><p>' + project.safeguards + '</p></div>',
+      '<div class="detail-box"><small>Technology</small><p>' + project.tools + '</p></div>',
+    '</div>'
+  ].join("");
+
+  const brandDetails = project.brands ? [
+    '<div class="tool-brand-row" aria-label="Tools used">',
+      project.brands.map(brand => '<span class="tool-brand"><img src="' + brand.src + '" alt="" /><strong>' + brand.label + '</strong></span>').join(""),
+    '</div>'
+  ].join("") : "";
+
+  const skillDetails = project.skills ? [
+    '<h3 class="workflow-heading">Skills demonstrated</h3>',
+    '<div class="case-skill-list">',
+      project.skills.map(skill => '<span>' + skill + '</span>').join(""),
+    '</div>'
+  ].join("") : "";
+
+  const videoDetails = project.video ? [
+    '<h3 class="workflow-heading">Workflow demo video</h3>',
+    '<figure style="margin:0 0 1.5rem">',
+      '<video controls preload="metadata" poster="' + project.video.poster + '" style="display:block;width:100%;aspect-ratio:16/9;background:#050b14;border:1px solid rgba(148,163,184,.22);border-radius:16px" aria-label="' + project.title + ' workflow demonstration">',
+        '<source src="' + project.video.src + '" type="video/mp4" />',
+        'Your browser does not support HTML video.',
+      '</video>',
+      '<figcaption style="margin-top:.65rem;color:#9fb2c9;font-size:.88rem">' + project.video.caption + '</figcaption>',
+    '</figure>'
+  ].join("") : "";
+
+  const evidenceDetails = [
+    '<h3 class="workflow-heading">Actual workflow evidence</h3>',
+    '<div class="workflow-gallery">',
+      project.images.map((image, index) => [
+        '<button class="workflow-shot" type="button" data-src="', image.src,
+        '" data-caption="', image.caption,
+        '" data-alt="', image.alt, '">',
+        '<img src="', image.src, '" alt="', image.alt, '" loading="lazy" />',
+        '<span>', String(index + 1), '. ', image.caption, ' · Click to enlarge</span>',
+        '</button>'
+      ].join("")).join(""),
+    '</div>'
+  ].join("");
+
+  const ctaDetails = project.caseStudy ? [
+    '<div class="case-cta">',
+      '<div><small>Project CTA</small><strong>Need a similar workflow for your business?</strong><p>Let’s map the process, define the safeguards, and build a practical automation around the tools your team already uses.</p></div>',
+      '<a class="button button-small" href="#contact" data-close-case>Discuss a similar workflow <span aria-hidden="true">↗</span></a>',
+    '</div>'
+  ].join("") : "";
+
+  dialogContent.innerHTML = [
+    '<span class="dialog-kicker">Case study ', project.number, ' · ', project.platformLabel, ' · Completed</span>',
+    '<h2 id="dialog-title">', project.title, '</h2>',
+    '<p class="dialog-intro">', project.summary, '</p>',
+    detailedContent,
+    brandDetails,
+    skillDetails,
+    videoDetails,
+    evidenceDetails,
+    ctaDetails
+  ].join("");
   caseDialog.showModal();
   document.body.classList.add("modal-open");
 }
@@ -212,6 +433,13 @@ document.querySelector(".dialog-close").addEventListener("click", () => caseDial
 caseDialog.addEventListener("close", () => document.body.classList.remove("modal-open"));
 caseDialog.addEventListener("click", event => { if (event.target === caseDialog) caseDialog.close(); });
 dialogContent.addEventListener("click", event => {
+  const cta = event.target.closest("[data-close-case]");
+  if (cta) {
+    event.preventDefault();
+    caseDialog.close();
+    setTimeout(() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }), 0);
+    return;
+  }
   const shot = event.target.closest(".workflow-shot");
   if (!shot) return;
   lightboxImage.src = shot.dataset.src;
