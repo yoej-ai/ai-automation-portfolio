@@ -372,6 +372,18 @@ body { background: #06101c; }
 .calendar-card-head > div { display: flex; align-items: center; gap: 10px; }
 .calendar-card-head span { width: 34px; height: 34px; display: grid; place-items: center; color: var(--cyan); background: rgba(41,214,199,.08); border: 1px solid rgba(41,214,199,.24); border-radius: 9px; font-size: 11px; font-weight: 800; }
 .calendar-card-head small { color: var(--muted); }
+
+
+@media (max-width: 760px) {
+  html, body { overflow-x: hidden; }
+  .hero { padding-top: 2.5rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-copy { max-width: 100%; }
+  .hero-visual { width: 100%; max-width: 100%; margin: 0 auto; }
+  .portrait-card { width: min(100%, 360px); margin: 0 auto; }
+  .profile-photo { width: 100%; height: auto; object-fit: cover; object-position: center top; }
+}
+
 .calendar-card iframe { display: block; width: 100%; height: 700px; border: 0; border-radius: 13px; background: white; }
 .calendar-card > p { margin: 12px 5px 3px; color: var(--muted); font-size: 11px; }
 .calendly-inline-widget { width: 100%; min-width: 0 !important; height: 700px !important; overflow: hidden; border: 1px solid rgba(155,140,255,.22); border-radius: 13px; background: #081321; }
@@ -398,6 +410,18 @@ body { background: #06101c; }
   .calendar-card iframe { height: 720px; border-radius: 11px; }
   .calendly-inline-widget { height: 720px !important; border-radius: 11px; }
 }
+
+
+@media (max-width: 760px) {
+  html, body { overflow-x: hidden; }
+  .hero { padding-top: 2.5rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-copy { max-width: 100%; }
+  .hero-visual { width: 100%; max-width: 100%; margin: 0 auto; }
+  .portrait-card { width: min(100%, 360px); margin: 0 auto; }
+  .profile-photo { width: 100%; height: auto; object-fit: cover; object-position: center top; }
+}
+
 
 /* UrbanNest case-study additions */
 .tool-brand-row { display: flex; flex-wrap: wrap; gap: 9px; margin: 4px 0 30px; }
