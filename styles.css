@@ -424,6 +424,18 @@ body { background: #06101c; }
 
 
 /* UrbanNest case-study additions */
+
+.delivery-support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.delivery-support-card { padding: 22px; border: 1px solid rgba(148,170,199,.2); border-radius: 16px; background: rgba(255,255,255,.035); }
+.delivery-support-card h3 { margin: 10px 0 18px; }
+.delivery-support-card > div + div { margin-top: 16px; }
+.delivery-support-card strong { display: block; margin-bottom: 5px; color: var(--cyan); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.delivery-support-card p { margin: 0; color: #c5d3e2; line-height: 1.6; }
+.service-number { color: var(--cyan); font-size: 12px; letter-spacing: .1em; font-weight: 700; }
+@media (max-width: 720px) {
+  .delivery-support-grid { grid-template-columns: 1fr; }
+}
+
 .tool-brand-row { display: flex; flex-wrap: wrap; gap: 9px; margin: 4px 0 30px; }
 .tool-brand { min-height: 42px; padding: 8px 11px; display: inline-flex; align-items: center; gap: 9px; color: #cfe0ef; border: 1px solid rgba(148,170,199,.18); border-radius: 10px; background: rgba(255,255,255,.03); }
 .tool-brand img { width: 22px; height: 22px; object-fit: contain; }
