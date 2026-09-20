@@ -325,6 +325,11 @@ const projects = [
     ],
     "images": [
       {
+        "src": "news-automation-facebook-post.png",
+        "caption": "Published Facebook news post",
+        "alt": "Facebook news page post generated from the approved news automation workflow"
+      },
+      {
         "src": "news-automation-workflow.png",
         "caption": "Complete n8n news automation workflow",
         "alt": "n8n workflow for collecting Philippine news, generating content with Groq, requesting Telegram approval, and publishing approved posts"
@@ -333,11 +338,6 @@ const projects = [
         "src": "news-automation-telegram-approval.png",
         "caption": "Telegram approval checkpoint",
         "alt": "Telegram news bot message showing a generated news draft with Approve and Reject buttons"
-      },
-      {
-        "src": "news-automation-facebook-post.png",
-        "caption": "Published Facebook news post",
-        "alt": "Facebook news page post generated from the approved news automation workflow"
       }
     ],
     "caseStudy": {
