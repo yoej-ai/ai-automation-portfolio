@@ -293,7 +293,84 @@ const projects = [
       { src: "urbanest-knowledge-base.jpg", caption: "UrbanNest knowledge-base documents", alt: "Google Drive folder containing Company FAQ, Services and Pricing, and Support Policies documents" },
       { src: "urbanest-email-proof.jpg", caption: "Verified human-review email", alt: "Gmail notification showing Human Review Required for session ticket-test-005" }
     ]
-  },
+  },,
+  {
+    "number": "09",
+    "platform": "n8n",
+    "platformLabel": "n8n",
+    "title": "News Automation — Groq + Telegram Approval",
+    "summary": "A content automation workflow that collects Philippine news, uses Groq to prepare a concise post draft, sends it to Telegram for human approval, and publishes approved content to the news page and Facebook.",
+    "flow": [
+      "Scheduled news collection",
+      "RSS / feed parsing",
+      "Groq summary and caption generation",
+      "News item validation and filtering",
+      "Telegram approval request",
+      "Approve or reject decision",
+      "Publish approved post"
+    ],
+    "tools": "n8n · Groq · Telegram · RSS · Blogger · Facebook",
+    "problem": "News publishing can become repetitive when headlines, summaries, captions, source links, and social posts all need to be prepared manually while still requiring a human to review the final wording.",
+    "solution": "The workflow gathers news items, prepares a structured draft with Groq, routes the draft to Telegram with Approve and Reject actions, and continues to publishing only after approval. The result is a repeatable news-to-social workflow with a clear human checkpoint.",
+    "safeguards": "Human approval before publishing, source-link preservation, structured news-item handling, duplicate and empty-item checks, and a reject path that stops publication.",
+    "skills": [
+      "RSS and feed ingestion",
+      "Groq AI summarization",
+      "Telegram approval workflows",
+      "Human-in-the-loop automation",
+      "Content filtering and validation",
+      "Blogger publishing",
+      "Facebook post automation",
+      "n8n branching and routing"
+    ],
+    "images": [
+      {
+        "src": "news-automation-workflow.png",
+        "caption": "Complete n8n news automation workflow",
+        "alt": "n8n workflow for collecting Philippine news, generating content with Groq, requesting Telegram approval, and publishing approved posts"
+      },
+      {
+        "src": "news-automation-telegram-approval.png",
+        "caption": "Telegram approval checkpoint",
+        "alt": "Telegram news bot message showing a generated news draft with Approve and Reject buttons"
+      },
+      {
+        "src": "news-automation-facebook-post.png",
+        "caption": "Published Facebook news post",
+        "alt": "Facebook news page post generated from the approved news automation workflow"
+      }
+    ],
+    "caseStudy": {
+      "overview": "A human-in-the-loop n8n news publishing system designed to turn incoming Philippine news items into reviewed, ready-to-publish content for a blog and Facebook page.",
+      "challenge": "News updates arrive from multiple sources and require repeated research, summarization, caption writing, link formatting, and social publishing. Fully automatic publishing can also create a quality-control risk, so the workflow needed a fast approval step before anything went live.",
+      "integrations": [
+        "n8n",
+        "Groq",
+        "Telegram",
+        "RSS / news feeds",
+        "Blogger",
+        "Facebook"
+      ],
+      "workflow": [
+        "A schedule starts the workflow and collects new items from configured news feeds.",
+        "The workflow parses and filters the incoming items, keeping only usable records with source information.",
+        "Groq prepares a concise summary, headline treatment, and Facebook-ready caption from the news content.",
+        "n8n sends the draft to a Telegram bot with Approve and Reject actions.",
+        "An approval webhook routes the decision: approved items continue, while rejected items stop without publication.",
+        "The approved content is published to the blog and social channel, then the workflow records the result."
+      ],
+      "aiLogic": "Groq is used for content preparation and classification support, not for final publishing authority. The automation keeps the generated output structured so the headline, summary, caption, source, and publish decision can be routed reliably through n8n.",
+      "safeguards": [
+        "Telegram approval is required before publication.",
+        "The source link is carried into the generated post.",
+        "Empty or unusable news items are filtered before the AI step.",
+        "Reject actions stop the publishing branch.",
+        "Publishing remains traceable through the workflow outputs and platform posts."
+      ],
+      "result": "A repeatable news-to-social pipeline that reduces manual formatting work while keeping the final publish decision with a human reviewer.",
+      "limitations": "The workflow still depends on the availability and quality of the configured feeds, Groq output quality, Telegram delivery, and the publishing platforms' API or account permissions. A human should review sensitive, disputed, or high-impact news before approval."
+    }
+  }
 ];
 
 const demoConfigs = {
