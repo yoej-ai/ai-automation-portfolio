@@ -610,7 +610,7 @@ function openCaseStudy(number) {
   ].join("") : "";
 
   const evidenceDetails = [
-    '<h3 class="workflow-heading">Actual workflow evidence</h3>',
+    '<h3 class="workflow-heading">Screenshots & workflow evidence</h3>',
     '<div class="workflow-gallery">',
       project.images.map((image, index) => [
         '<button class="workflow-shot" type="button" data-src="', image.src,
@@ -634,11 +634,11 @@ function openCaseStudy(number) {
     '<span class="dialog-kicker">Case study ', project.number, ' · ', project.platformLabel, ' · Completed</span>',
     '<h2 id="dialog-title">', project.title, '</h2>',
     '<p class="dialog-intro">', project.summary, '</p>',
+    evidenceDetails,
     detailedContent,
     brandDetails,
     skillDetails,
     videoDetails,
-    evidenceDetails,
     ctaDetails
   ].join("");
   caseDialog.showModal();
