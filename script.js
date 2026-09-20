@@ -293,7 +293,7 @@ const projects = [
       { src: "urbanest-knowledge-base.jpg", caption: "UrbanNest knowledge-base documents", alt: "Google Drive folder containing Company FAQ, Services and Pricing, and Support Policies documents" },
       { src: "urbanest-email-proof.jpg", caption: "Verified human-review email", alt: "Gmail notification showing Human Review Required for session ticket-test-005" }
     ]
-  },,
+  },
   {
     "number": "09",
     "platform": "n8n",
@@ -541,7 +541,7 @@ function renderProjects(filter = "all") {
 }
 
 function openCaseStudy(number) {
-  const project = projects.find(item => item.number === number);
+  const project = projects.find(item => item?.number === number);
   if (!project) return;
 
   const detailedContent = project.caseStudy ? [
