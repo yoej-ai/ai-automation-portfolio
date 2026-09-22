@@ -652,6 +652,7 @@ const demoConfigs = {
 };
 
 const grid = document.querySelector("#projects-grid");
+const featuredGrid = document.querySelector("#featured-projects-grid");
 const caseDialog = document.querySelector("#case-dialog");
 const dialogContent = document.querySelector("#dialog-content");
 const imageDialog = document.querySelector("#image-dialog");
@@ -659,6 +660,42 @@ const lightboxImage = document.querySelector("#lightbox-image");
 const lightboxCaption = document.querySelector("#lightbox-caption");
 const demoDialog = document.querySelector("#demo-dialog");
 const demoContent = document.querySelector("#demo-content");
+
+
+const featuredProjectNumbers = ["08", "10", "04"];
+const featuredProof = {
+  "08": ["RAG knowledge base", "Human escalation", "Ticketing + follow-up"],
+  "10": ["AI match scoring", "Duplicate check", "Personalized application"],
+  "04": ["Inventory routing", "AI review", "Automated email updates"]
+};
+
+function renderFeaturedProjects() {
+  if (!featuredGrid) return;
+  const featured = featuredProjectNumbers.map(number => projects.find(project => project.number === number)).filter(Boolean);
+  featuredGrid.innerHTML = featured.map((project, index) => `
+    <article class="featured-project-card reveal" data-featured-rank="${String(index + 1).padStart(2, "0")}">
+      <div class="featured-card-top">
+        <span class="featured-index">FEATURED ${String(index + 1).padStart(2, "0")}</span>
+        <div class="badge-row">
+          <span class="project-badge">${project.platformLabel}</span>
+          <span class="project-badge completed">● Tested build</span>
+        </div>
+      </div>
+      <h3>${project.title}</h3>
+      <p>${project.summary}</p>
+      <div class="featured-proof-row">${(featuredProof[project.number] || []).map(item => `<span>✓ ${item}</span>`).join("")}</div>
+      <div class="featured-flow">${project.flow.slice(0, 4).map((step, stepIndex) => `<span><b>${String(stepIndex + 1).padStart(2, "0")}</b>${step}</span>`).join("")}</div>
+      <div class="featured-footer">
+        <span class="tool-list">${project.tools}</span>
+        <div class="project-actions">
+          <button class="case-button featured-case-button" type="button" data-project="${project.number}">View case study ↗</button>
+          ${demoConfigs[project.number] && document.querySelector("#demo-dialog") ? `<button class="demo-button" type="button" data-demo="${project.number}">Try live demo ↗</button>` : ""}
+        </div>
+      </div>
+    </article>
+  `).join("");
+  bindReveals();
+}
 
 function renderProjects(filter = "all") {
   const visible = filter === "all" ? projects : projects.filter(project => project.platform === filter);
@@ -826,6 +863,16 @@ function openDemo(number) {
   });
 }
 
+featuredGrid?.addEventListener("click", event => {
+  const demoButton = event.target.closest("[data-demo]");
+  if (demoButton) {
+    openDemo(demoButton.dataset.demo);
+    return;
+  }
+  const button = event.target.closest("[data-project]");
+  if (button) openCaseStudy(button.dataset.project);
+});
+
 grid.addEventListener("click", event => {
   const demoButton = event.target.closest("[data-demo]");
   if (demoButton) {
@@ -884,6 +931,7 @@ window.addEventListener("scroll", () => document.querySelector(".site-header").c
 const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); }), { threshold: .12 });
 function bindReveals() { document.querySelectorAll(".reveal").forEach(element => observer.observe(element)); }
 
+renderFeaturedProjects();
 renderProjects();
 bindReveals();
 
