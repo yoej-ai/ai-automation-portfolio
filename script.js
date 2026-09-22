@@ -370,6 +370,105 @@ const projects = [
       "result": "A repeatable news-to-social pipeline that reduces manual formatting work while keeping the final publish decision with a human reviewer.",
       "limitations": "The workflow still depends on the availability and quality of the configured feeds, Groq output quality, Telegram delivery, and the publishing platforms' API or account permissions. A human should review sensitive, disputed, or high-impact news before approval."
     }
+  },
+  {
+    number: "10",
+    platform: "n8n",
+    platformLabel: "n8n",
+    title: "AI Job Application Assistant",
+    summary: "A human-in-the-loop job-search workflow that reads LinkedIn and OnlineJobs alerts, qualifies each role with AI, prevents duplicate applications, prepares a tailored message, and requests approval in Telegram before any next action.",
+    flow: [
+      "Scheduled Gmail job-alert intake",
+      "LinkedIn and OnlineJobs filtering",
+      "Full job-post extraction",
+      "Groq candidate-fit qualification",
+      "Duplicate application check",
+      "Personalized application generation",
+      "Telegram approval or skip",
+      "Email or ready-to-submit routing"
+    ],
+    tools: "n8n · Groq AI · Gmail · Google Sheets · Telegram · Google Drive",
+    problem: "Reviewing job alerts, opening full listings, comparing requirements, avoiding duplicate applications, writing tailored messages, and tracking every status creates a large amount of repetitive work. Fully automatic submission would also remove an important human decision from the process.",
+    solution: "The workflow monitors job-alert emails, extracts and enriches each listing, scores candidate fit with Groq, checks Google Sheets for duplicates, generates a personalized application, and sends a structured approval package to Telegram. Approved jobs are routed by application method, while skipped jobs are recorded without being submitted.",
+    safeguards: "Match-score threshold, duplicate detection, structured AI output, Telegram approval before application routing, separate email and platform paths, and explicit Google Sheets status updates.",
+    skills: [
+      "Gmail job-alert automation",
+      "LinkedIn and OnlineJobs parsing",
+      "Full job-post extraction",
+      "Groq structured qualification",
+      "Candidate-fit scoring",
+      "Duplicate application prevention",
+      "Personalized application generation",
+      "Telegram human approval",
+      "Google Sheets application tracking",
+      "Email and manual-platform routing"
+    ],
+    brands: [
+      { src: "assets/brands/n8n.svg", label: "n8n" },
+      { src: "assets/brands/ai.svg", label: "Groq AI" },
+      { src: "assets/brands/gmail.svg", label: "Gmail" },
+      { src: "assets/brands/googlesheets.svg", label: "Google Sheets" },
+      { src: "assets/brands/googledrive.svg", label: "Google Drive" }
+    ],
+    video: {
+      src: "job-application-demo.mp4",
+      poster: "job-application-workflow.jpg",
+      caption: "Live workflow demonstration: job-alert intake, AI qualification, approval routing, and application tracking"
+    },
+    images: [
+      {
+        src: "job-application-workflow.jpg",
+        caption: "Complete AI Job Application Assistant workflow",
+        alt: "Complete n8n workflow for job-alert intake, AI qualification, duplicate checking, Telegram approval, and application routing"
+      },
+      {
+        src: "job-application-telegram-approval.jpg",
+        caption: "Telegram qualification and approval checkpoint",
+        alt: "Telegram bot showing a job match review, missing skills, personalized application message, and Approve or Skip buttons"
+      }
+    ],
+    caseStudy: {
+      overview: "A completed n8n job-application assistant that turns incoming job alerts into qualified, deduplicated, personalized, and human-approved application packages.",
+      challenge: "Job opportunities arrive through different email formats and often contain incomplete preview text. Each listing must be opened, evaluated against the candidate profile, checked against previous applications, personalized, and tracked. The process needed automation without allowing AI to submit applications independently.",
+      integrations: [
+        "n8n",
+        "Gmail",
+        "LinkedIn job alerts",
+        "OnlineJobs.ph alerts",
+        "Groq AI",
+        "Google Sheets",
+        "Google Drive",
+        "Telegram",
+        "HTTP requests",
+        "JavaScript and JSON parsing"
+      ],
+      workflow: [
+        "A schedule starts the workflow and Gmail retrieves new LinkedIn or OnlineJobs job alerts.",
+        "The workflow filters relevant alerts, retrieves the complete message, and extracts the platform, job ID, title, company, URL, and preview details.",
+        "An HTTP request opens the full job post and a parsing step extracts the usable job description.",
+        "The candidate profile and job description are sent to Groq for structured qualification, including match score, matched skills, missing skills, and recommendation.",
+        "Only jobs meeting the configured match-score threshold continue to the application path.",
+        "Google Sheets is checked by job URL or job ID to prevent the same opportunity from being processed twice.",
+        "Groq prepares a personalized application message grounded in the candidate profile and the role requirements.",
+        "The job record, AI assessment, and current workflow status are saved in Google Sheets.",
+        "Telegram sends the complete review package with Approve and Skip actions for human control.",
+        "Approved jobs are routed by application method: email applications can receive the resume and portfolio package, while platform applications generate a ready-to-submit Telegram package.",
+        "Applied, emailed, ready-to-submit, or skipped outcomes are written back to Google Sheets and confirmed through Telegram."
+      ],
+      aiLogic: "Groq returns structured fields instead of an unrestricted free-form answer. The qualification step compares the job requirements with the saved candidate profile and produces a match score, relevant skills, missing skills, and recommendation. A separate generation step writes a role-specific application message. Deterministic n8n conditions—not the AI alone—control thresholds, duplicate checks, approval status, and the final routing path.",
+      safeguards: [
+        "Filters job-alert sources before qualification.",
+        "Requires a configured match-score threshold before continuing.",
+        "Checks Google Sheets for duplicate job URLs or IDs.",
+        "Uses structured AI output for predictable routing.",
+        "Requires Telegram approval before any application action.",
+        "Keeps email and platform-application paths separate.",
+        "Records each status change for traceability.",
+        "Keeps platform submission and final hiring decisions under human control."
+      ],
+      result: "The workflow converts scattered job alerts into an organized application pipeline. It reduces repetitive job review and message writing, keeps opportunities from being processed twice, and gives the candidate one clear Telegram checkpoint before each qualified job proceeds.",
+      limitations: "Job-site layouts, anti-bot controls, email formats, rate limits, and application requirements can change. Some platform applications still require manual submission, CAPTCHA completion, screening questions, or identity confirmation. AI scoring and generated messages should be reviewed before use."
+    }
   }
 ];
 
@@ -510,6 +609,43 @@ const demoConfigs = {
         acknowledgement: "Simulated Gmail acknowledgement",
         escalation: urgent ? "Simulated Slack / email escalation" : "No escalation — standard support queue",
         human_review: "Required for final resolution"
+      };
+    }
+  },
+  "10": {
+    title: "AI Job Application Assistant",
+    description: "Paste a sample job description and candidate skill set to preview qualification, duplicate checking, personalized-message preparation, and the Telegram approval route.",
+    flow: ["Demo job alert", "Job-detail extraction", "AI-style qualification", "Duplicate check", "Personalized message", "Telegram approval route"],
+    fields: [
+      { name: "job_title", label: "Job title", type: "text", placeholder: "AI Automation Specialist", defaultValue: "AI Automation Specialist" },
+      { name: "job_description", label: "Job description", type: "textarea", rows: 6, placeholder: "We need experience with n8n, APIs, JSON, webhooks, Google Sheets, Gmail, and AI workflows.", defaultValue: "We need experience with n8n, APIs, JSON, webhooks, Google Sheets, Gmail, and AI workflows." },
+      { name: "candidate_skills", label: "Candidate skills", type: "textarea", rows: 5, placeholder: "n8n, Make.com, Zapier, API integration, JSON, webhooks, Google Sheets, Gmail, Groq AI", defaultValue: "n8n, Make.com, Zapier, API integration, JSON, webhooks, Google Sheets, Gmail, Groq AI, prompt engineering" },
+      { name: "application_method", label: "Application method", type: "text", placeholder: "Platform", defaultValue: "Platform" }
+    ],
+    run(values) {
+      const jobTitle = String(values.job_title || "Sample role");
+      const jobText = String(values.job_description || "").toLowerCase();
+      const candidateText = String(values.candidate_skills || "").toLowerCase();
+      const skills = ["n8n", "make.com", "zapier", "api", "json", "webhooks", "google sheets", "gmail", "groq", "prompt engineering", "automation", "javascript"];
+      const required = skills.filter(skill => jobText.includes(skill));
+      const matched = required.filter(skill => candidateText.includes(skill));
+      const missing = required.filter(skill => !candidateText.includes(skill));
+      const coverage = required.length ? matched.length / required.length : 0.5;
+      const score = Math.min(96, Math.max(45, Math.round(45 + coverage * 51)));
+      const qualified = score >= 70;
+      const method = /email/i.test(String(values.application_method || "")) ? "EMAIL" : "PLATFORM";
+      return {
+        job: jobTitle,
+        source_filter: "Passed — supported job alert (simulated)",
+        duplicate_check: "Passed — no existing job URL found (simulated)",
+        matched_skills: matched.length ? matched.join(", ") : "No direct keyword matches detected",
+        missing_skills: missing.length ? missing.join(", ") : "None detected in this sample",
+        match_score: score + "%",
+        qualification: qualified ? "READY_FOR_APPROVAL" : "SKIPPED_LOW_MATCH",
+        personalized_opening: qualified ? "I am applying for the " + jobTitle + " role because my automation and integration experience aligns with the listed requirements." : "Not generated below the qualification threshold",
+        approval_route: qualified ? "Telegram APPROVE or SKIP required" : "Stopped before approval",
+        application_route: qualified ? (method === "EMAIL" ? "Email package with resume and portfolio (simulated)" : "Ready-to-submit platform package (simulated)") : "No application action",
+        side_effects: "Demo only — no email, Telegram message, sheet row, or application was created"
       };
     }
   }
