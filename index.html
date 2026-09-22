@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=14" />
-    <script src="script.js?v=17" defer></script>
+    <link rel="stylesheet" href="styles.css?v=15" />
+    <script src="script.js?v=18" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -28,6 +28,7 @@
         </button>
         <div class="nav-links" id="nav-links">
           <a href="#top">Home</a>
+          <a href="#featured">Featured</a>
           <a href="#about">About Me</a>
           <a href="#skills">Skills</a>
                     <a href="#projects">Projects</a>
@@ -41,13 +42,18 @@
       <section class="hero" id="top">
         <div class="shell hero-grid">
           <div class="hero-copy reveal">
-            <p class="eyebrow"><span class="status-dot"></span>AI Automation &amp; Technical Specialist</p>
-            <h1>Yoej Gramaje Jr.</h1>
-                  <p class="hero-role">I turn repetitive business tasks into reliable AI systems that save time and move teams faster.</p>
-                        <p class="hero-lead">Built with n8n, Make.com, Zapier, GoHighLevel, APIs, and Claude Code.</p>
+            <p class="eyebrow"><span class="status-dot"></span>Yoej Gramaje Jr. · AI Automation Specialist</p>
+            <h1>AI systems that cut repetitive work and keep your team moving.</h1>
+            <p class="hero-role">From lead routing and support agents to job applications and e-commerce operations.</p>
+            <p class="hero-lead">Built with n8n, Make.com, Zapier, Groq, Supabase, APIs, and human approval where it matters.</p>
             <div class="hero-actions">
-              <a class="button" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
-              <a class="button button-ghost" href="#projects">Featured projects</a>
+              <a class="button" href="#featured">Explore featured work <span aria-hidden="true">↗</span></a>
+              <a class="button button-ghost" href="#contact">Book a consultation</a>
+            </div>
+            <div class="hero-proof" aria-label="Portfolio highlights">
+              <span><strong>10</strong> completed automation builds</span>
+              <span><strong>Live</strong> interactive demos</span>
+              <span><strong>Tested</strong> APIs, webhooks &amp; approval paths</span>
             </div>
           </div>
 
@@ -60,11 +66,23 @@
         </div>
       </section>
 
+
+      <section class="section featured-section" id="featured">
+        <div class="shell">
+          <div class="section-heading featured-heading">
+            <div><p class="section-kicker">01 / Selected Work</p><h2>Three automation systems worth opening first.</h2></div>
+            <p>Real workflows with screenshots, architecture, safeguards, and interactive demos—not placeholder concepts.</p>
+          </div>
+          <div class="featured-projects-grid" id="featured-projects-grid"></div>
+          <div class="featured-all-link"><a class="button button-ghost" href="#projects">View all 10 completed projects <span aria-hidden="true">↓</span></a></div>
+        </div>
+      </section>
+
       <section class="section expertise-section" id="about">
         <div class="shell">
           <div class="section-heading expertise-heading">
-            <div><p class="section-kicker">01 / About Me</p><h2>I turn repetitive business processes into reliable AI systems.</h2></div>
-            <p>I’m Yoej Gramaje Jr., an AI Automation &amp; Technical Specialist. I design practical workflows, AI agents, and connected business systems for sales, support, appointments, HR, onboarding, and e-commerce. My focus is clear workflow logic, structured AI outputs, API and webhook integrations, data validation, error handling, and human-review paths.</p>
+            <div><p class="section-kicker">02 / About Me</p><h2>I turn repetitive business processes into reliable AI systems.</h2></div>
+            <p>I specialize in turning repetitive processes into practical AI-powered systems. My focus is not just connecting apps—I build workflows with clear logic, structured AI outputs, validation, error handling, API and webhook integrations, and human approval where it matters.</p>
           </div>
           <div class="expertise-ticker" aria-label="Tools and expertise">
             <div class="ticker-track">
@@ -107,7 +125,7 @@
       <section class="section section-dark" id="skills">
         <div class="shell">
           <div class="section-heading">
-            <div><p class="section-kicker">02 / Technical Skills</p><h2>Tools I use to build dependable systems.</h2></div>
+            <div><p class="section-kicker">03 / Technical Skills</p><h2>Tools I use to build dependable systems.</h2></div>
             <p>Focused on automation, AI, business data, and the day-to-day platforms teams already use.</p>
           </div>
           <div class="technical-grid">
@@ -121,7 +139,7 @@
       <section class="section" id="projects">
         <div class="shell">
           <div class="section-heading project-heading">
-            <div><p class="section-kicker">03 / Verified builds</p><h2>Completed automation projects.</h2></div>
+            <div><p class="section-kicker">04 / All Projects</p><h2>Completed automation projects.</h2></div>
             <p>Filter by platform, inspect the architecture, then open the real workflow screenshots and demos.</p>
           </div>
           <div class="filter-bar" role="group" aria-label="Filter projects by platform">
@@ -134,10 +152,34 @@
         </div>
       </section>
 
+
+      <section class="section how-section" id="process">
+        <div class="shell">
+          <div class="section-heading">
+            <div><p class="section-kicker">05 / How I Work</p><h2>From messy manual process to a tested automation.</h2></div>
+            <p>I keep the build understandable, testable, and easy to hand off—especially when AI is making routing or classification decisions.</p>
+          </div>
+          <div class="process-grid">
+            <article class="process-card reveal"><span>01</span><h3>Understand</h3><p>Map the current process, bottlenecks, inputs, exceptions, and the outcome the workflow should produce.</p></article>
+            <article class="process-card reveal"><span>02</span><h3>Design</h3><p>Choose the right tools, data structure, AI role, routing logic, and where human approval is required.</p></article>
+            <article class="process-card reveal"><span>03</span><h3>Build</h3><p>Connect APIs, webhooks, apps, databases, prompts, and structured outputs into one maintainable workflow.</p></article>
+            <article class="process-card reveal"><span>04</span><h3>Test</h3><p>Run normal, edge-case, duplicate, failure, and escalation scenarios before calling the workflow complete.</p></article>
+            <article class="process-card reveal"><span>05</span><h3>Deploy &amp; Support</h3><p>Document the system, hand it over clearly, and support rollout questions and minor post-launch adjustments.</p></article>
+          </div>
+          <div class="reliability-strip reveal">
+            <span>✓ Structured AI outputs</span>
+            <span>✓ Validation &amp; fallback logic</span>
+            <span>✓ Human-in-the-loop paths</span>
+            <span>✓ API &amp; webhook testing</span>
+            <span>✓ Documentation &amp; handoff</span>
+          </div>
+        </div>
+      </section>
+
       <section class="section roi-section" id="calculator">
         <div class="shell">
           <div class="section-heading">
-            <div><p class="section-kicker">04 / ROI Calculator</p><h2>Estimate the value of automation.</h2></div>
+            <div><p class="section-kicker">06 / ROI Calculator</p><h2>Estimate the value of automation.</h2></div>
             <p>Adjust the assumptions to explore potential time savings, operating savings, payback period, and first-year ROI.</p>
           </div>
 
@@ -187,7 +229,7 @@
       <section class="section section-dark" id="services">
         <div class="shell">
           <div class="section-heading">
-            <div><p class="section-kicker">05 / Services</p><h2>From repetitive process to reliable system.</h2></div>
+            <div><p class="section-kicker">07 / Services</p><h2>From repetitive process to reliable system.</h2></div>
             <p>Engagements can begin with one workflow and expand only where the business case is clear.</p>
           </div>
           <div class="services-grid">
@@ -205,7 +247,7 @@
       <section class="section contact-section" id="contact">
         <div class="shell">
           <div class="section-heading booking-heading">
-            <div><p class="section-kicker">06 / Book a Call</p><h2>Let’s discuss your next automation.</h2></div>
+            <div><p class="section-kicker">08 / Book a Call</p><h2>Let’s discuss your next automation.</h2></div>
             <p>Review the workflow demos, explore the case studies, or schedule a consultation to discuss your next automation.</p>
           </div>
           <div class="booking-grid">
