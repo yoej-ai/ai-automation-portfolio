@@ -469,6 +469,121 @@ const projects = [
       result: "The workflow converts scattered job alerts into an organized application pipeline. It reduces repetitive job review and message writing, keeps opportunities from being processed twice, and gives the candidate one clear Telegram checkpoint before each qualified job proceeds.",
       limitations: "Job-site layouts, anti-bot controls, email formats, rate limits, and application requirements can change. Some platform applications still require manual submission, CAPTCHA completion, screening questions, or identity confirmation. AI scoring and generated messages should be reviewed before use."
     }
+  },
+  {
+    "number": "11",
+    "platform": "ghl",
+    "platformLabel": "GoHighLevel",
+    "title": "GoHighLevel Lead Qualification, CRM Pipeline & Appointment Automation",
+    "summary": "A home-improvement business demo that captures project requests, qualifies leads, runs email follow-ups, and updates the CRM as consultations are booked and completed.",
+    "flow": [
+      "GHL form & custom fields",
+      "CRM opportunity & lead tags",
+      "Budget & timeline qualification",
+      "Email follow-up & nurture",
+      "Consultation booking",
+      "Appointment outcome routing"
+    ],
+    "tools": "4 workflows · GHL Forms · CRM · Email · Calendar",
+    "problem": "Home-improvement inquiries need consistent qualification, timely follow-up, and a clear handoff from initial request to consultation. Tracking these steps manually can leave leads and appointment outcomes disconnected.",
+    "solution": "Four connected GoHighLevel workflows handle new lead intake, qualified lead follow-up, appointment booking, and appointment status updates using forms, custom fields, tags, opportunities, If/Else conditions, emails, and a consultation calendar.",
+    "safeguards": "Explicit qualification branches, reply-or-timeout waits, dedicated appointment-status routes, and internal sales notifications.",
+    "skills": [
+      "GoHighLevel (GHL)",
+      "CRM & sales pipeline automation",
+      "Lead qualification & routing",
+      "Lead nurturing & email follow-up",
+      "GHL forms & custom fields",
+      "Opportunity management & contact tagging",
+      "Appointment & calendar automation",
+      "Conditional If/Else workflow logic",
+      "Workflow testing & debugging"
+    ],
+    "images": [
+      {
+        "src": "assets/ghl/ghl-form.jpg",
+        "caption": "Home-improvement lead form and custom project fields",
+        "alt": "GoHighLevel form with name, phone, email, project timeline, service type, and estimated budget fields"
+      },
+      {
+        "src": "assets/ghl/ghl-lead-intake.jpg",
+        "caption": "01 — New lead intake and budget/timeline qualification",
+        "alt": "GoHighLevel lead intake workflow with acknowledgement email and conditional high-priority qualification"
+      },
+      {
+        "src": "assets/ghl/ghl-qualified-lead.jpg",
+        "caption": "02 — Qualified lead pipeline automation and follow-up",
+        "alt": "GoHighLevel qualified lead workflow with opportunity update, owner assignment, notifications, emails, and reply wait"
+      },
+      {
+        "src": "assets/ghl/ghl-appointment-booked.jpg",
+        "caption": "03 — Appointment booked pipeline automation",
+        "alt": "GoHighLevel appointment booking workflow with opportunity update, confirmation email, sales notification, and reminder"
+      },
+      {
+        "src": "assets/ghl/ghl-appointment-status.jpg",
+        "caption": "04 — Appointment status routing: showed, no-show, or canceled",
+        "alt": "GoHighLevel appointment status workflow with showed, no-show, canceled, and fallback branches"
+      },
+      {
+        "src": "assets/ghl/ghl-pipeline.png",
+        "caption": "Sales pipeline with sample lead opportunities",
+        "alt": "GoHighLevel home improvement sales pipeline showing New Lead, Qualified, and Appointment Booked stages"
+      },
+      {
+        "src": "assets/ghl/ghl-calendar.jpg",
+        "caption": "Home Improvement Consultation booking calendar",
+        "alt": "GoHighLevel 30-minute home improvement consultation calendar with available booking times"
+      },
+      {
+        "src": "assets/ghl/ghl-acknowledgement-email.jpg",
+        "caption": "Delivered project-request acknowledgement email",
+        "alt": "Inbox evidence of the automated Apex Home Improvements acknowledgement for a bathroom remodeling request"
+      }
+    ],
+    "videos": [
+      {
+        "src": "assets/ghl/ghl-workflow-demo.mp4",
+        "poster": "assets/ghl/ghl-lead-intake.jpg",
+        "title": "Lead intake & qualification workflow",
+        "caption": "GHL workflow walkthrough showing opportunity creation, tags, notifications, budget/timeline branches, and email nurture waits."
+      },
+      {
+        "src": "assets/ghl/ghl-form-demo.mp4",
+        "poster": "assets/ghl/ghl-form.jpg",
+        "title": "Lead capture form & custom fields",
+        "caption": "Form walkthrough showing contact details, project timeline, service type, budget, property information, and preferred contact method."
+      }
+    ],
+    "caseStudy": {
+      "overview": "Built in GoHighLevel for the Apex Home Improvements demo, this system connects a project-request form to CRM opportunities, lead qualification, email follow-up, and consultation booking. The supplied evidence includes four workflow configurations, sample pipeline records, a calendar, a delivered acknowledgement email, and two walkthrough videos.",
+      "challenge": "A sales team needs project details, budget, and timeline before prioritizing inquiries. It also needs a consistent way to follow up, book consultations, and respond to attended, missed, or canceled appointments.",
+      "workflow": [
+        "01 — New Home Improvement Lead Intake: collect form fields, create or update the opportunity, add tags, notify the team, send an acknowledgement, and branch by budget and timeline.",
+        "02 — Qualified Lead Pipeline Automation: use qualification tags to update the opportunity, assign the lead, notify sales, send qualified follow-up, and wait for a reply or timeout before the next email.",
+        "03 — Appointment Booked Pipeline Automation: react to a consultation booking, update the opportunity, send a booking confirmation and sales notification, and schedule a reminder.",
+        "04 — Appointment Status Pipeline Automation: route showed, no-show, and canceled outcomes to the appropriate opportunity update, notification, or follow-up email."
+      ],
+      "logicLabel": "Qualification & workflow logic",
+      "aiLogic": "Qualification is rule-based: GoHighLevel If/Else conditions evaluate submitted custom fields such as estimated budget and project timeline. Contact tags connect the intake and qualified-lead workflows. Reply-or-timeout waits control nurture emails, while booking and appointment-status triggers drive the consultation handoff.",
+      "integrations": [
+        "GoHighLevel",
+        "GHL Forms & Custom Fields",
+        "Contacts & Tags",
+        "CRM Opportunities & Sales Pipeline",
+        "Email Workflows",
+        "Consultation Calendar",
+        "Internal Notifications"
+      ],
+      "safeguards": [
+        "Defined budget and timeline branches with a fallback route.",
+        "Reply-or-timeout waits in follow-up sequences.",
+        "Separate showed, no-show, and canceled appointment branches.",
+        "Internal notifications at lead and appointment handoff points."
+      ],
+      "result": "The demo captures project information in one form and keeps sample inquiries visible in the sales pipeline. The supplied inbox screenshot confirms delivery of the acknowledgement email. The configured workflows connect qualification, nurture, booking, and appointment outcomes into one sales process.",
+      "limitations": "This is a portfolio demonstration using sample leads. Qualification follows the configured rules; the sales team still reviews project feasibility, quotes, and final customer decisions."
+    }
   }
 ];
 
@@ -700,7 +815,7 @@ function renderFeaturedProjects() {
 function renderProjects(filter = "all") {
   const visible = filter === "all" ? projects : projects.filter(project => project.platform === filter);
   grid.innerHTML = visible.map(project => `
-    <article class="project-card reveal" style="--accent:${project.platform === "n8n" ? "rgba(41,214,199,.14)" : project.platform === "make" ? "rgba(155,140,255,.15)" : "rgba(255,163,92,.13)"}">
+    <article class="project-card reveal" style="--accent:${project.platform === "n8n" ? "rgba(41,214,199,.14)" : project.platform === "make" ? "rgba(155,140,255,.15)" : project.platform === "ghl" ? "rgba(77,151,255,.14)" : "rgba(255,163,92,.13)"}">
       <div class="project-meta">
         <span class="project-number">CASE STUDY ${project.number}</span>
         <div class="badge-row"><span class="project-badge">${project.platformLabel}</span><span class="project-badge completed">● Completed</span></div>
@@ -708,12 +823,12 @@ function renderProjects(filter = "all") {
       <h3>${project.title}</h3>
       <p class="project-summary">${project.summary}</p>
       <div class="mini-flow">${project.flow.map(step => `<span>${step}</span>`).join("")}</div>
-      <div class="project-footer"><span class="tool-list">${project.tools}</span><div class="project-actions"><button class="case-button" type="button" data-project="${project.number}">View case study ↗</button>${demoConfigs[project.number] && document.querySelector("#demo-dialog") ? `<button class="demo-button" type="button" data-demo="${project.number}">Try live demo ↗</button>` : ""}</div></div>
+      <div class="project-footer"><span class="tool-list">${project.tools}</span><div class="project-actions"><button class="case-button" type="button" data-project="${project.number}">View case study ↗</button>${project.videos?.length ? `<button class="demo-button" type="button" data-video-project="${project.number}">Watch videos (${project.videos.length}) ↗</button>` : ""}${demoConfigs[project.number] && document.querySelector("#demo-dialog") ? `<button class="demo-button" type="button" data-demo="${project.number}">Try live demo ↗</button>` : ""}</div></div>
     </article>`).join("");
   bindReveals();
 }
 
-function openCaseStudy(number) {
+function openCaseStudy(number, { showVideos = false } = {}) {
   const project = projects.find(item => item?.number === number);
   if (!project) return;
 
@@ -734,7 +849,7 @@ function openCaseStudy(number) {
       project.caseStudy.workflow.map((step, index) => '<li><span class="workflow-step-number">' + String(index + 1).padStart(2, "0") + '</span><div><strong>' + step + '</strong></div></li>').join(""),
     '</ol>',
     '<div class="dialog-grid case-study-text-grid">',
-      '<div class="detail-box"><small>AI logic</small><p>',
+      '<div class="detail-box"><small>' + (project.caseStudy.logicLabel || 'AI logic') + '</small><p>',
       project.caseStudy.aiLogic,
       '</p></div>',
       '<div class="detail-box"><small>Reliability and safeguards</small><ul class="case-list">',
@@ -771,15 +886,21 @@ function openCaseStudy(number) {
     '</div>'
   ].join("") : "";
 
-  const videoDetails = project.video ? [
-    '<h3 class="workflow-heading">Workflow demo video</h3>',
-    '<figure style="margin:0 0 1.5rem">',
-      '<video controls preload="metadata" poster="' + project.video.poster + '" style="display:block;width:100%;aspect-ratio:16/9;background:#050b14;border:1px solid rgba(148,163,184,.22);border-radius:16px" aria-label="' + project.title + ' workflow demonstration">',
-        '<source src="' + project.video.src + '" type="video/mp4" />',
-        'Your browser does not support HTML video.',
-      '</video>',
-      '<figcaption style="margin-top:.65rem;color:#9fb2c9;font-size:.88rem">' + project.video.caption + '</figcaption>',
-    '</figure>'
+  const videos = project.videos || (project.video ? [project.video] : []);
+  const videoDetails = videos.length ? [
+    '<section id="case-videos" class="case-videos" aria-label="Project demo videos">',
+    '<h3 class="workflow-heading">' + (videos.length > 1 ? 'Project demo videos' : 'Workflow demo video') + '</h3>',
+    videos.map(video => [
+      '<figure style="margin:0 0 1.5rem">',
+        video.title ? '<h4>' + video.title + '</h4>' : '',
+        '<video controls playsinline preload="metadata" poster="' + video.poster + '" style="display:block;width:100%;aspect-ratio:16/9;background:#050b14;border:1px solid rgba(148,163,184,.22);border-radius:16px" aria-label="' + (video.title || project.title + ' workflow demonstration') + '">',
+          '<source src="' + video.src + '" type="video/mp4" />',
+          'Your browser does not support HTML video. <a href="' + video.src + '">Open the video</a>.',
+        '</video>',
+        '<figcaption style="margin-top:.65rem;color:#9fb2c9;font-size:.88rem">' + video.caption + ' <a href="' + video.src + '" target="_blank" rel="noopener">Open video ↗</a></figcaption>',
+      '</figure>'
+    ].join("")).join(""),
+    '</section>'
   ].join("") : "";
 
   const evidenceDetails = [
@@ -807,15 +928,17 @@ function openCaseStudy(number) {
     '<span class="dialog-kicker">Case study ', project.number, ' · ', project.platformLabel, ' · Completed</span>',
     '<h2 id="dialog-title">', project.title, '</h2>',
     '<p class="dialog-intro">', project.summary, '</p>',
+    project.videos ? videoDetails : '',
     evidenceDetails,
     detailedContent,
     brandDetails,
     skillDetails,
-    videoDetails,
+    project.videos ? '' : videoDetails,
     ctaDetails
   ].join("");
   caseDialog.showModal();
   document.body.classList.add("modal-open");
+  if (showVideos) document.querySelector("#case-videos")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 function escapeDemoHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, character => ({
@@ -869,6 +992,11 @@ featuredGrid?.addEventListener("click", event => {
     openDemo(demoButton.dataset.demo);
     return;
   }
+  const videoButton = event.target.closest("[data-video-project]");
+  if (videoButton) {
+    openCaseStudy(videoButton.dataset.videoProject, { showVideos: true });
+    return;
+  }
   const button = event.target.closest("[data-project]");
   if (button) openCaseStudy(button.dataset.project);
 });
@@ -879,12 +1007,20 @@ grid.addEventListener("click", event => {
     openDemo(demoButton.dataset.demo);
     return;
   }
+  const videoButton = event.target.closest("[data-video-project]");
+  if (videoButton) {
+    openCaseStudy(videoButton.dataset.videoProject, { showVideos: true });
+    return;
+  }
   const button = event.target.closest("[data-project]");
   if (button) openCaseStudy(button.dataset.project);
 });
 
 document.querySelector(".dialog-close").addEventListener("click", () => caseDialog.close());
-caseDialog.addEventListener("close", () => document.body.classList.remove("modal-open"));
+caseDialog.addEventListener("close", () => {
+  document.body.classList.remove("modal-open");
+  dialogContent.querySelectorAll("video").forEach(video => video.pause());
+});
 caseDialog.addEventListener("click", event => { if (event.target === caseDialog) caseDialog.close(); });
 dialogContent.addEventListener("click", event => {
   const cta = event.target.closest("[data-close-case]");
@@ -934,6 +1070,8 @@ function bindReveals() { document.querySelectorAll(".reveal").forEach(element =>
 renderFeaturedProjects();
 renderProjects();
 bindReveals();
+const linkedProject = window.location.hash.match(/^#project-(\d{2})$/);
+if (linkedProject) openCaseStudy(linkedProject[1]);
 
 const roiInputs = {
   hours: document.querySelector("#hours-per-task"),
