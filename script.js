@@ -584,7 +584,132 @@ const projects = [
       "result": "The demo captures project information in one form and keeps sample inquiries visible in the sales pipeline. The supplied inbox screenshot confirms delivery of the acknowledgement email. The configured workflows connect qualification, nurture, booking, and appointment outcomes into one sales process.",
       "limitations": "This is a portfolio demonstration using sample leads. Qualification follows the configured rules; the sales team still reviews project feasibility, quotes, and final customer decisions."
     }
+  },
+{
+  "number": "12",
+  "platform": "ghl",
+  "platformLabel": "GoHighLevel",
+  "title": "Apex Financial Services — AI Voice Agent & Post-Call Automation",
+  "summary": "A Voice AI demo that handles approved inquiries, captures and confirms contact details, qualifies interest, and turns call transcripts into CRM updates, consultation bookings, and customer follow-up.",
+  "flow": [
+    "Voice AI & knowledge base",
+    "Contact details & consultation request",
+    "Transcript data extraction",
+    "CRM update & outcome routing",
+    "Duplicate booking safeguard",
+    "Booking success check & confirmation"
+  ],
+  "tools": "GHL Voice AI · Knowledge Base · CRM · Workflows · Calendar · Email",
+  "problem": "Customer inquiries can leave contact details, consultation requests, and follow-up tasks scattered across calls and CRM records. Sending a confirmation before booking succeeds can also mislead the customer.",
+  "solution": "Juvy collects caller details and consultation preferences. The AI Post-Call Follow-Up workflow extracts structured data from the transcript, updates the CRM, routes by call outcome, and only sends an appointment confirmation after booking success is verified.",
+  "safeguards": "Confirmed email capture, a booked-contact tag check, booking-success gating, approved knowledge-base answers, human handoff, and sensitive-data exclusions.",
+  "skills": [
+    "GoHighLevel Voice AI & Flow Builder",
+    "Voice agent prompt engineering",
+    "Knowledge-base configuration",
+    "AI transcript data extraction",
+    "CRM field mapping & contact validation",
+    "Call outcome classification & routing",
+    "Post-call follow-up automation",
+    "Appointment booking & confirmation",
+    "Duplicate booking safeguards",
+    "Booking failure handling",
+    "Human handoff workflows",
+    "Web Call testing & debugging"
+  ],
+  "images": [
+    {
+      "src": "assets/ghl/apex-financial/voice-agent.jpg",
+      "caption": "Voice AI Flow Builder and connected actions",
+      "alt": "GoHighLevel Voice AI flow with knowledge-base search, CRM outcome actions, tags, and follow-up"
+    },
+    {
+      "src": "assets/ghl/apex-financial/post-call-workflow.jpg",
+      "caption": "AI Post-Call Follow-Up workflow overview",
+      "alt": "GoHighLevel post-call workflow with AI extraction, outcome branches, and appointment routing"
+    },
+    {
+      "src": "assets/ghl/apex-financial/execution-log.jpg",
+      "caption": "Executed contact update, booking, notification, and confirmation steps",
+      "alt": "GoHighLevel execution log showing successful post-call booking and email actions"
+    },
+    {
+      "src": "assets/ghl/apex-financial/crm-booking.jpg",
+      "caption": "CRM record, booking tags, and confirmed consultation",
+      "alt": "GoHighLevel contact with consultation request and booked tags, confirmed appointment, and confirmation email"
+    },
+    {
+      "src": "assets/ghl/apex-financial/confirmed-appointment.jpg",
+      "caption": "Confirmed: October 12, 2026 at 11:00 AM AWST",
+      "alt": "GoHighLevel appointment list with a confirmed Apex Financial Services consultation"
+    },
+    {
+      "src": "assets/ghl/apex-financial/calendar.jpg",
+      "caption": "Apex Financial Services Consultation calendar",
+      "alt": "GoHighLevel October 2026 calendar with sample financial consultation appointments"
+    },
+    {
+      "src": "assets/ghl/apex-financial/confirmation-email.jpg",
+      "caption": "Delivered appointment confirmation email",
+      "alt": "Inbox evidence of the Apex Financial Services consultation confirmation with date and time"
+    },
+    {
+      "src": "assets/ghl/apex-financial/requested-time.png",
+      "caption": "Web Call transcript: requested consultation time confirmed with the caller",
+      "alt": "Voice AI transcript capturing October 12 at 11 AM as a requested time, before post-call booking"
+    }
+  ],
+  "videos": [
+    {
+      "src": "assets/ghl/apex-financial/web-call-demo.mp4",
+      "poster": "assets/ghl/apex-financial/requested-time.png",
+      "title": "Juvy — Web Call test highlights",
+      "caption": "Recorded English Web Call test: greeting, inquiry, and requested consultation time. Contact collection is omitted from this public edit for privacy. The agent captures a request; the workflow books after the call."
+    },
+    {
+      "src": "assets/ghl/apex-financial/post-call-workflow-demo.mp4",
+      "poster": "assets/ghl/apex-financial/post-call-workflow.jpg",
+      "title": "AI Post-Call Follow-Up — workflow walkthrough",
+      "caption": "Workflow recording showing transcript extraction, CRM updates, call-outcome branches, duplicate booking protection, and consultation handling. The screenshots below show the completed booking and confirmation run."
+    }
+  ],
+  "caseStudy": {
+    "overview": "Built as an Apex Financial Services portfolio demo, this system connects a GoHighLevel AI Voice Agent to post-call CRM and appointment automation. Juvy uses an approved financial-services knowledge base, collects the caller’s full name, phone, and confirmed email, qualifies interest, and captures a preferred consultation or callback time.",
+    "challenge": "Capture usable information during a customer conversation, route follow-up consistently, prevent a repeat booking for a contact already marked booked, and ensure a confirmation email is sent only when the calendar booking actually succeeds.",
+    "integrations": [
+      "GoHighLevel Voice AI",
+      "Voice AI Flow Builder",
+      "Apex Financial Services Knowledge Base",
+      "Transcript Generated trigger",
+      "AI Extract Data",
+      "Contacts, Custom Fields & Tags",
+      "GHL Workflows & If/Else Conditions",
+      "Consultation Calendar",
+      "Internal Notifications & Email"
+    ],
+    "workflow": [
+      "Voice conversation — Juvy answers approved knowledge-base questions, collects full name, phone, and email, confirms the email, and records the preferred consultation or callback date and time.",
+      "Transcript Generated — the Voice AI transcript starts AI Post-Call Follow-Up, adds a safeguard note, and passes the conversation to AI Extract Data.",
+      "Extract and update — extract call outcome, lead interest, callback date/time, consultation status, human handoff, first name, last name, phone, and email; update CRM fields and route by call outcome.",
+      "Appointment Requested — tag the request and check for ai-appointment-booked. If the contact is already tagged booked, end this branch to avoid another booking.",
+      "Book consultation — update caller contact details from extracted values, then attempt a 30-minute phone consultation in Apex Financial Services Consultation using Australia/Perth (GMT+8).",
+      "Check Booking Success — require Book Financial Consultation → Appointment Booked = True before updating consultation status to booked, adding ai-appointment-booked, notifying the team, and sending the confirmation email. False/None ends this branch."
+    ],
+    "logicLabel": "Voice AI & post-call routing logic",
+    "aiLogic": "AI structures the call transcript into defined CRM classifications. AI Call Outcome values are Qualified / Interested, Appointment Requested, Callback Requested, Human Agent Requested, Not Interested, Do Not Contact, and Unable to Connect. Workflow conditions use these values to select the follow-up path. Appointment Booked is set after verified booking success; a requested time during the call is not a confirmed appointment.",
+    "safeguards": [
+      "Use approved knowledge-base answers; avoid personalized financial or investment advice and guaranteed outcomes.",
+      "Never request passwords, PINs, OTPs, card details, or banking credentials; use human handoff when needed.",
+      "Confirm the caller’s email before proceeding with consultation details.",
+      "Stop the appointment-request branch when ai-appointment-booked is already present. This safeguard depends on the CRM tag being accurate.",
+      "Send the booking confirmation only when the Book Appointment action reports Appointment Booked = True. An unavailable slot can skip booking; False/None ends without a confirmation.",
+      "Use fresh test contact details because this location rejects phone/email values already attached to another contact.",
+      "Keep personal email addresses and phone numbers out of public evidence; the public Web Call edit omits contact collection."
+    ],
+    "result": "The successful end-to-end test collected and confirmed caller details, extracted transcript data, updated the GHL contact, created a consultation, marked it Confirmed, and sent the booking confirmation to the newly supplied email. The evidence shows October 12, 2026, 11:00–11:30 AM AWST. Duplicate booking and unavailable-slot scenarios were also tested; the booking-success condition prevents false confirmation emails.",
+    "limitations": "Portfolio/demo project tested through Web Call; Apex Financial Services is a fictional demo brand. Production telephony and automatic outbound AI phone follow-up were not deployed. Post-call CRM updates, follow-up, consultation booking, notifications, and confirmation emails are implemented. Filipino recognition is working in testing; natural Filipino/Taglish pronunciation and language matching are still being tuned. The supplied public call recording demonstrates English. The failed/unavailable booking branch currently ends without a recovery action."
   }
+}
 ];
 
 const demoConfigs = {
@@ -815,7 +940,7 @@ function renderFeaturedProjects() {
 function renderProjects(filter = "all") {
   const visible = filter === "all" ? projects : projects.filter(project => project.platform === filter);
   grid.innerHTML = visible.map(project => `
-    <article class="project-card reveal" style="--accent:${project.platform === "n8n" ? "rgba(41,214,199,.14)" : project.platform === "make" ? "rgba(155,140,255,.15)" : project.platform === "ghl" ? "rgba(77,151,255,.14)" : "rgba(255,163,92,.13)"}">
+    <article id="project-${project.number}" class="project-card reveal" style="--accent:${project.platform === "n8n" ? "rgba(41,214,199,.14)" : project.platform === "make" ? "rgba(155,140,255,.15)" : project.platform === "ghl" ? "rgba(77,151,255,.14)" : "rgba(255,163,92,.13)"}">
       <div class="project-meta">
         <span class="project-number">CASE STUDY ${project.number}</span>
         <div class="badge-row"><span class="project-badge">${project.platformLabel}</span><span class="project-badge completed">● Completed</span></div>
